@@ -11,15 +11,18 @@ class LoginController extends Controller
     }
     public function loginAction(Request $req){
         $row = Pengguna::firstWhere('username', '=',$req['username']) ?? [];
-        if($row == 0){
-            exit;
+        $type = gettype($row);
+        if($type != "object" ){
+            if(count($row) == 0){
+                return view('login', ['status' => 404]);
+            }
         }
         else{
             if($req['password'] == $row['password']){
-                return view('home');
+                return redirect()->intended('/home');
             }
             else{
-                exit;
+                return view('login', ['status' => 403]);
             }
         }
     }

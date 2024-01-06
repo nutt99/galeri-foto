@@ -40,3 +40,13 @@
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+
+@php
+$stats = $status ?? "";
+    if($stats == 404){
+        echo "<script>window.alert('Akun Tidak Ditemukan')</script>";
+    }
+    if($stats == 403){
+        echo "<script>window.alert('Username atau Password Salah')</script>";
+    }
+@endphp
