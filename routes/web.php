@@ -20,5 +20,9 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [LoginController::class, 'loginView']);
 Route::post('/login', [LoginController::class, 'loginAction']);
 
+//register
+Route::get('/registrasi', [LoginController::class, 'registerView']);
+Route::post('/registrasi', [LoginController::class, 'registerPengguna']);
+
 //home
 Route::get('/home', [HomeController::class, 'homeView']);

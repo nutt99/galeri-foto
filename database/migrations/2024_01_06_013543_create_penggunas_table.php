@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password', 255);
             $table->string('email', 255);
             $table->string('nama_lengkap', 255);
-            $table->text('alamat');
+            $table->text('alamat')->nullable();
             $table->timestamps();
         });
     }

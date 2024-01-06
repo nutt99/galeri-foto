@@ -9,6 +9,9 @@ class LoginController extends Controller
     public function loginView(){
         return view('login');
     }
+    public function registerView(){
+        return view('register');
+    }
     public function loginAction(Request $req){
         $row = Pengguna::firstWhere('username', '=',$req['username']) ?? [];
         $type = gettype($row);
@@ -25,5 +28,8 @@ class LoginController extends Controller
                 return view('login', ['status' => 403]);
             }
         }
+    }
+    public function registerPengguna(Request $req){
+        
     }
 }
