@@ -15,7 +15,7 @@
                         <h4>Masuk terlebih dahulu</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="/login">
+                        <form method="POST" action="/">
                             @csrf
                             <div class="form-group">
                                 <label for="username">Username</label>
@@ -48,5 +48,8 @@ $stats = $status ?? "";
     }
     if($stats == 403){
         echo "<script>window.alert('Username atau Password Salah')</script>";
+    }
+    if (Session::get('status') == 400) {
+        echo "<script>window.alert('Akun berhasil dibuat')</script>";
     }
 @endphp

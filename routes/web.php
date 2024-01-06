@@ -18,7 +18,10 @@ use App\Http\Controllers\HomeController;
 
 //login
 Route::get('/', [LoginController::class, 'loginView']);
-Route::post('/login', [LoginController::class, 'loginAction']);
+Route::post('/', [LoginController::class, 'loginAction']);
+
+//logout
+Route::get('/logout', [LoginController::class, 'logout']);
 
 //register
 Route::get('/registrasi', [LoginController::class, 'registerView']);

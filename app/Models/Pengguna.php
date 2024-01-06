@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pengguna extends Model
 {
     use HasFactory;
-    protected $guard = [
+    protected $guarded = [
         'id',
         'created_at'
     ];

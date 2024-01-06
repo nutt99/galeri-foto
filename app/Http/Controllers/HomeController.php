@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function homeView(Request $req){
-        return view('home');
+        if($req->session()->get('username') == null && $req->session()->get('uid') == null){
+            return redirect()->intended('/');
+        }
+        else{
+            return view('home');
+        }
     }
 }
