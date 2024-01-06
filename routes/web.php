@@ -13,4 +13,7 @@ use App\Http\Controllers\LoginController;
 |
 */
 
+
+//login
 Route::get('/', [LoginController::class, 'loginView']);
+Route::post('/login', [LoginController::class, 'loginAction']);

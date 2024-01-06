@@ -9,6 +9,7 @@ class Pengguna extends Model
 {
     use HasFactory;
     protected $guard = [
-        'id'
+        'id',
+        'created_at'
     ];
 }
