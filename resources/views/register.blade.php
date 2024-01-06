@@ -26,7 +26,11 @@
                                 <input name="password" type="password" class="form-control" id="password" placeholder="Masukkan Password">
                             </div>
                             <div class="form-group">
-                                <a href="/registrasi" class="text-decoration-none">Belum punya akun? Register terlebih dahulu</a>
+                                <label for="email">Email</label>
+                                <input name="email" type="email" class="form-control" id="email" placeholder="example@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <a href="/" class="text-decoration-none">Sudah punya akun? Ayo login</a>
                             </div>
                             <div class="text-center mt-3">
                                 <input type="submit" class="btn btn-primary text-center" value="Login">
@@ -40,13 +44,3 @@
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
-
-@php
-$stats = $status ?? "";
-    if($stats == 404){
-        echo "<script>window.alert('Akun Tidak Ditemukan')</script>";
-    }
-    if($stats == 403){
-        echo "<script>window.alert('Username atau Password Salah')</script>";
-    }
-@endphp

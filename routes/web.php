@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
+/*
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +15,14 @@ use App\Http\Controllers\LoginController;
 |
 */
 
+
+//login
 Route::get('/', [LoginController::class, 'loginView']);
+Route::post('/login', [LoginController::class, 'loginAction']);
+
+//register
+Route::get('/registrasi', [LoginController::class, 'registerView']);
+Route::post('/registrasi', [LoginController::class, 'registerPengguna']);
+
+//home
+Route::get('/home', [HomeController::class, 'homeView']);
