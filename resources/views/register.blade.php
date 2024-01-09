@@ -15,7 +15,7 @@
                         <h4>Masuk terlebih dahulu</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="/login">
+                        <form method="POST" action="/registrasi">
                             @csrf
                             <div class="form-group">
                                 <label for="username">Username</label>
@@ -33,7 +33,7 @@
                                 <a href="/" class="text-decoration-none">Sudah punya akun? Ayo login</a>
                             </div>
                             <div class="text-center mt-3">
-                                <input type="submit" class="btn btn-primary text-center" value="Login">
+                                <input type="submit" class="btn btn-primary text-center" value="Registrasi">
                             </div>
                         </form>
                     </div>
