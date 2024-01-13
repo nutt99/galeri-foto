@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Album;
+use App\Http\Controllers\FunctionListt;
 
 class HomeController extends Controller
 {

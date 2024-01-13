@@ -80,14 +80,16 @@
                 <a href="" class="text-decoration-none"><h5 class="rounded-pill p-2 text-light text-center" style="background-color: black">Tambah +</h5></a>
               </div>
             </div>
-            @foreach ($album as $a)
-          <div class="container card col-2 m-1 text-center">
-            <a class="text-decoration-none " href="" style="color: black">
+            <div class="row column-gap-3">
+              @foreach ($album as $a)
+          <div class="container card col-2 m-1 text-center m-2">
+            <a class="text-decoration-none " href="album/{{ $a['id'] }}" style="color: black">
               <div class="card-img-top mt-4"><i class="fas fa-folder" style="font-size:60px"></i></div>
             <div class="card-body container text-truncate">{{$a['nama_album']}} </div>
             </a>
           </div>
           @endforeach
+            </div>
           </div>
         </div>
       </div>
