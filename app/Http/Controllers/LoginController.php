@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengguna;
+use App\Http\Controllers\FunctionListt;
 use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
@@ -12,9 +13,13 @@ class LoginController extends Controller
         $request->session()->flush();
         return redirect()->intended('/');
     }
+    private function setChecker(Request $req){
+        $fl = new FunctionListt;
+        return $fl->sessionCheck($req);
+    }
 
     public function loginView(Request $request){
-        if($request->session()->get('username') != null && $request->session()->get('uid') != null){
+        if($this->setChecker($request) == true){
             return redirect()->intended('/home');
         }
         else{
@@ -22,7 +27,7 @@ class LoginController extends Controller
         }
     }
     public function registerView(Request $req){
-        if($req->session()->get('username') == null && $req->session()->get('uid') == null){
+        if($this->setChecker($req) == true){
             return view('register');
         }
         return redirect()->intended('/home');
