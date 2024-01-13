@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Album;
 
 class HomeController extends Controller
 {
@@ -11,7 +12,10 @@ class HomeController extends Controller
             return redirect()->intended('/');
         }
         else{
-            return view('home');
+            $album = Album::get()->where('userid', $req->session()->get('uid'));
+            return view('home', [
+                'album' => $album,
+            ]);
         }
     }
 }

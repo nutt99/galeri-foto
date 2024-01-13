@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('penggunas')->insert([
             'username' => 'nata',
-            'password' => 'nata123',
+            'password' => Hash::make('nata123'),
             'email' => 'nata@gmail.com',
             'nama_lengkap' => 'chrisdinata',
             'alamat' => 'komplek perumahan srigunting',
@@ -27,11 +28,18 @@ class DatabaseSeeder extends Seeder
 
         DB::table('penggunas')->insert([
             'username' => 'fardan',
-            'password' => 'fardan123',
+            'password' => Hash::make('fardan123'),
             'email' => 'fardan@gmail.com',
             'nama_lengkap' => 'fardan muhammad fiksa',
             'alamat' => 'komplek perumahan srigunting',
         ]);
+
+         DB::table('albums')->insert([
+             'nama_album' => "gabut aja",
+             'deskripsi' => "buat folower aku <3",
+             'userid' => 1,
+             'visibilitas' => 'publik' 
+         ]);
 
         // \App\Models\User::factory(10)->create();
 

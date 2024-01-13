@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
-    <title>Beranda</title>
-    <style>
-      .k :hover{
-        background-color: rgb(156, 156, 156);
-      }
-    </style>
-</head>
-<body>
-  {{-- navbar --}}
-  <div class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: black">
+<div class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: black">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -65,23 +48,3 @@
         </a>
         </ul>
       </div>
-      {{-- end navbar --}}
-      <div style="width:80%">
-        <div class="row row-cols-2 m-2 mt-3 ms-3">
-          {{-- @for ($i = 1; $i < 240; $i++)
-          <div class="container card col-2 m-1">
-            <div class="card-body">Ini contoh {{$i}} </div>
-          </div>
-          @endfor --}}
-          @foreach ($album as $a)
-          <div class="container card col-2 m-1">
-            <div class="card-img-top"><i class="fas fa-folder" style="font-size:60px"></i></div>
-            <div class="card-body">{{$a['nama_album']}} </div>
-          </div>
-          @endforeach
-        </div>
-      </div>
-    </div>
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

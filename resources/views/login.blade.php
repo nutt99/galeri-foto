@@ -19,11 +19,11 @@
                             @csrf
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input name="username" type="text" class="form-control" id="username" placeholder="Masukkan Username">
+                                <input required autofocus name="username" type="text" class="form-control" id="username" placeholder="Masukkan Username">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input name="password" type="password" class="form-control" id="password" placeholder="Masukkan Password">
+                                <input required name="password" type="password" class="form-control" id="password" placeholder="Masukkan Password">
                             </div>
                             <div class="form-group">
                                 <a href="/registrasi" class="text-decoration-none">Belum punya akun? Register terlebih dahulu</a>

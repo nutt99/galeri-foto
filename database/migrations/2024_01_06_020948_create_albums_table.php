@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama_album', 255);
             $table->text('deskripsi');
+            $table->integer('userid');
+            $table->enum('visibilitas', ["publik", "folower", "private"]);
             $table->timestamps();
         });
     }
