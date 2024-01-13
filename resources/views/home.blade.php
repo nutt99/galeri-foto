@@ -67,18 +67,28 @@
       </div>
       {{-- end navbar --}}
       <div style="width:80%">
-        <div class="row row-cols-2 m-2 mt-3 ms-3">
+        <div class="row m-2 mt-3 ms-3">
           {{-- @for ($i = 1; $i < 240; $i++)
           <div class="container card col-2 m-1">
             <div class="card-body">Ini contoh {{$i}} </div>
           </div>
           @endfor --}}
-          @foreach ($album as $a)
-          <div class="container card col-2 m-1">
-            <div class="card-img-top"><i class="fas fa-folder" style="font-size:60px"></i></div>
-            <div class="card-body">{{$a['nama_album']}} </div>
+          <div class="row">
+            <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <h2>Album</h2>
+                <a href="" class="text-decoration-none"><h5 class="rounded-pill p-2 text-light text-center" style="background-color: black">Tambah +</h5></a>
+              </div>
+            </div>
+            @foreach ($album as $a)
+          <div class="container card col-2 m-1 text-center">
+            <a class="text-decoration-none " href="" style="color: black">
+              <div class="card-img-top mt-4"><i class="fas fa-folder" style="font-size:60px"></i></div>
+            <div class="card-body container text-truncate">{{$a['nama_album']}} </div>
+            </a>
           </div>
           @endforeach
+          </div>
         </div>
       </div>
     </div>

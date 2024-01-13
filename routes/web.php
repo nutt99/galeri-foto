@@ -29,3 +29,6 @@ Route::post('/registrasi', [LoginController::class, 'registerPengguna']);
 
 //home
 Route::get('/home', [HomeController::class, 'homeView']);
+
+//detail album
+
