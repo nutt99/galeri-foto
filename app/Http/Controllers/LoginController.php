@@ -27,7 +27,7 @@ class LoginController extends Controller
         }
     }
     public function registerView(Request $req){
-        if($this->setChecker($req) == true){
+        if($this->setChecker($req) == false){
             return view('register');
         }
         return redirect()->intended('/home');

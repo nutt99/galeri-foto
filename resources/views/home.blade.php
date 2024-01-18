@@ -44,26 +44,28 @@
   </div>  
     <div class="row row-cols-2">
       <div class="col sticky-top" style="height:100vh;width:20%;background-color:black;">
-        <ul class="pt-5">
-            <a class="text-decoration-none k" href="#">
-              <li class="list-group-item d-flex justify-content-between align-items-center text-light mb-3">
+        <div class="pt-5 ms-2">
+            <a class="text-decoration-none k" href="/home">
+              <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
               Beranda
-              <span class="badge bg-primary rounded-pill me-4">14</span>
-            </li>
+              </div>
             </a>
-          <a href="#" class="text-decoration-none k">
-          <li class="list-group-item d-flex justify-content-between align-items-center text-light mb-3">
+          <a href="/" class="text-decoration-none k">
+          <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
             Album
-            <span class="badge bg-primary rounded-pill me-4">2</span>
-          </li>
+          </div>
         </a>
-        <a href="#" class="text-decoration-none k">
-          <li class="list-group-item d-flex justify-content-between align-items-center text-light mb-3">
+        <a href="/profil" class="text-decoration-none k">
+          <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
             Profil
-            <span class="badge bg-primary rounded-pill me-4">1</span>
-          </li>
+          </div>
         </a>
-        </ul>
+        <a href="/logout" class="text-decoration-none k">
+          <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
+            Logout
+          </div>
+        </a>
+        </div>
       </div>
       {{-- end navbar --}}
       <div style="width:80%">
@@ -77,7 +79,7 @@
             <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2">
               <div class="d-flex justify-content-between align-items-center">
                 <h2>Album</h2>
-                <a href="" class="text-decoration-none"><h5 class="rounded-pill p-2 text-light text-center" style="background-color: black">Tambah +</h5></a>
+                <a href="/create-album" class="text-decoration-none"><h5 class="rounded-pill p-2 text-light text-center" style="background-color: black">Tambah +</h5></a>
               </div>
             </div>
             <div class="row column-gap-3">
@@ -85,7 +87,7 @@
           <div class="container card col-2 m-1 text-center m-2">
             <a class="text-decoration-none " href="album/{{ $a['id'] }}" style="color: black">
               <div class="card-img-top mt-4"><i class="fas fa-folder" style="font-size:60px"></i></div>
-            <div class="card-body container text-truncate">{{$a['nama_album']}} </div>
+            <div class="card-body container text-truncate"><div style="font-weight: bold">({{ $a['visibilitas'] }})</div> {{$a['nama_album']}} </div>
             </a>
           </div>
           @endforeach
@@ -97,3 +99,9 @@
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+@php
+    if (Session::get('status_code') == 403) {
+      echo "<script>window.alert('Album sudah ada')</script>";
+    }
+@endphp

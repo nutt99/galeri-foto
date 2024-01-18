@@ -70,6 +70,12 @@ class DatabaseSeeder extends Seeder
             'userid' => 1,
             'visibilitas' => 'publik' 
         ]);
+        DB::table('albums')->insert([
+            'nama_album' => "bagas aklsmdlkaskdklasldnklafnsa",
+            'deskripsi' => "buat folower aku <3",
+            'userid' => 1,
+            'visibilitas' => 'publik' 
+        ]);
 
         // \App\Models\User::factory(10)->create();
 
