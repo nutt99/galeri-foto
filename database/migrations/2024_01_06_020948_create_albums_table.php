@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
             $table->string('nama_album', 255)->unique();
-            $table->text('deskripsi');
+            $table->text('deskripsi')->nullable();
             $table->integer('userid');
             $table->enum('visibilitas', ["publik", "folower", "private"]);
             $table->timestamps();

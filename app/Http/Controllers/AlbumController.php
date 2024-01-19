@@ -12,16 +12,16 @@ class AlbumController extends Controller
         return "Halo kamu sedang di album $id_album";
     }
 
-    public function mkdir(Request $req){
+    public function mkDirrr(Request $req){
         // system('mkdir tesss');
         try{
-            system('mkdir lol');
+            mkdir('album_user/'.$req->album_name);
             Album::create([
-                'nama_album' => "lolaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                'deskripsi' => "tes upload album",
+                'nama_album' => $req->album_name,
                 'userid' => $req->session()->get('uid'),
-                'visibilitas' => 'publik',
+                'visibilitas' => $req->visible,
             ]);
+            return redirect()->intended("/home");
         } catch(Exception $e) {
             return redirect()->intended('/home')->with([
                 'status_code' => 403,

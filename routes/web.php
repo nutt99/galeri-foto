@@ -34,4 +34,4 @@ Route::get('/home', [HomeController::class, 'homeView']);
 //detail album
 Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
 
-Route::get('/create-album', [AlbumController::class, 'mkdir']);
+Route::post('/home', [AlbumController::class, 'mkDirrr']);
