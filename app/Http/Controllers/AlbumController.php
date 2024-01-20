@@ -12,7 +12,10 @@ class AlbumController extends Controller
     private $ekstensi = ['jpg', 'jpeg', 'png'];
     public function detailView(Request $req, $id_album){
         $detailFoto = Foto::get()->where('albumId', $id_album);
+        $album = Album::firstWhere('id', $id_album);
+        $namaAlbum = explode("@", $album['nama_album'])[0];
         return view('detailFotoView', [
+            'namaAlbum' => $namaAlbum,
             'detailFoto' => $detailFoto
         ]);
     }
