@@ -34,4 +34,5 @@ Route::get('/home', [HomeController::class, 'homeView']);
 //detail album
 Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
 
-Route::post('/home', [AlbumController::class, 'mkDirrr']);
+Route::post('/create-album', [AlbumController::class, 'mkDirrr']);
+Route::post('/addPhoto', [AlbumController::class, 'upFoto']);
