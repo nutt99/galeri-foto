@@ -123,8 +123,8 @@
                     echo asset($a['lokasi_file']);
                   @endphp" class="card-img-top" alt="...">
                     <div class="card-body">
-                       <h5 class="card-title">Judul Kartu</h5>
-                       <p class="card-text">Deskripsi kartu.</p>
+                       <h5 class="card-title">Ini judul ceritanya</h5>
+                       <p class="card-text text-truncate">{{$a['deskripsi']}}</p>
                        <!-- Tombol, Tautan, atau elemen lainnya -->
                     </div>
                  </div>
