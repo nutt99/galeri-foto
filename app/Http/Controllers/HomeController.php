@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Album;
+use App\Http\Controllers\FunctionListt;
 
 class HomeController extends Controller
 {
     public function homeView(Request $req){
-        if($req->session()->get('username') == null && $req->session()->get('uid') == null){
+        $fl = new FunctionListt;
+        if($fl->sessionCheck($req) == false){
             return redirect()->intended('/');
         }
-        else{
-            return view('home');
+        else{   
+            $album = Album::get()->where('userid', $req->session()->get('uid'));
+            return view('home', [
+                'album' => $album,
+            ]);
         }
     }
 }

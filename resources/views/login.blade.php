@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Selamat Datang</title>
-    <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
   </head>
   <body>
     <div class="container mt-5" style="margin:auto">
@@ -19,11 +19,11 @@
                             @csrf
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input name="username" type="text" class="form-control" id="username" placeholder="Masukkan Username">
+                                <input required autofocus name="username" type="text" class="form-control" id="username" placeholder="Masukkan Username">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input name="password" type="password" class="form-control" id="password" placeholder="Masukkan Password">
+                                <input required name="password" type="password" class="form-control" id="password" placeholder="Masukkan Password">
                             </div>
                             <div class="form-group">
                                 <a href="/registrasi" class="text-decoration-none">Belum punya akun? Register terlebih dahulu</a>
@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   </body>
 </html>
 

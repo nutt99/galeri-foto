@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Selamat Datang</title>
-    <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <title>Registrasi</title>
+    <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
   </head>
   <body>
     <div class="container mt-5" style="margin:auto">
@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <div class="card" style="border-radius: 20px">
                     <div class="card-header text-center">
-                        <h4>Masuk terlebih dahulu</h4>
+                        <h4>Registrasi akun anda</h4>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="/registrasi">
@@ -41,6 +41,13 @@
             </div>
         </div>
     </div>
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   </body>
 </html>
+
+@php
+    $status = $status ?? "";
+    if ($status == 401) {
+        echo "<script>window.alert('Username sudah digunakan')</script>";
+    }
+@endphp

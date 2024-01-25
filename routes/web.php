@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
@@ -29,3 +30,10 @@ Route::post('/registrasi', [LoginController::class, 'registerPengguna']);
 
 //home
 Route::get('/home', [HomeController::class, 'homeView']);
+
+//detail album
+Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
+
+Route::post('/create-album', [AlbumController::class, 'mkDirrr']);
+Route::post('/addPhoto', [AlbumController::class, 'upFoto']);
+

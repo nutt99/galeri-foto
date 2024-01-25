@@ -5,13 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
     <title>Beranda</title>
     <style>
       .k :hover{
         background-color: rgb(156, 156, 156);
       }
+      .grid-item {
+            margin-bottom: 15px;
+        }
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -75,70 +83,6 @@
         </div>
       </div>
       {{-- end navbar --}}
-      {{-- Modal --}}
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <form action="/create-album" method="POST">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Buat Album</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body container">
-        <label for="AlbumName">Nama Album</label>
-        <input class="form-control" type="text" name="album_name" id="AlbumName" placeholder="Nama Album">
-        <label for="AlbumName">Visibilitas</label>
-        <select name="visible" class="form-select">
-          <option value="publik">Publik</option>
-          <option value="folower">Pengikut</option>
-          <option value="private">Private</option>
-        </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          @csrf
-        <input type="submit" class="btn text-light" style="background-color: black" value="Buat">
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-      {{-- End Modal --}}
-      {{-- Modal 2 --}}
-      <div class="modal fade" id="addPhoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <form action="/addPhoto" method="POST" enctype="multipart/form-data">
-            @csrf
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambahkan Foto</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body container">
-              <div class="mb-3">
-                <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" id="formFile" name="foto">
-              </div>              
-              <label for="AlbumName">Visibilitas</label>
-              <select name="albumName" class="form-select">
-                @foreach ($album as $a)
-                  <option value="{{ $a['nama_album'] }}!!!{{ $a['id'] }}">@php
-                    echo explode("@", $a['nama_album'])[0];
-                  @endphp 
-                  ({{ $a['visibilitas'] }})</option>
-                @endforeach
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <input type="submit" class="btn text-light" style="background-color: black" value="Buat">
-            </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      {{-- end modal 2 --}}
       <div style="width:80%">
         <div class="row m-2 mt-3 ms-3">
           {{-- @for ($i = 1; $i < 240; $i++)
@@ -149,7 +93,7 @@
           <div class="row">
             <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2">
               <div class="d-flex justify-content-between align-items-center">
-                <h2>Album</h2>
+                <h2>{{ $namaAlbum }}</h2>
                 {{-- <a href="/create-album" class="text-decoration-none"><h5 class="rounded-pill p-2 text-light text-center" style="background-color: black">Tambah +</h5></a> --}}
                 <button type="button" class="rounded-pill text-light border-0 text-center p-1 fs-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: black">
                   Tambah +
@@ -157,7 +101,7 @@
               </div>
             </div>
             <div class="row column-gap-3">
-              @foreach ($album as $a)
+              {{-- @foreach ($detailFoto as $a)
           <div class="container card col-2 m-1 text-center m-2">
             <a class="text-decoration-none " href="album/{{ $a['id'] }}" style="color: black">
               <div class="card-img-top mt-4"><i class="fas fa-folder" style="font-size:60px"></i></div>
@@ -166,7 +110,28 @@
             @endphp </div>
             </a>
           </div>
-          @endforeach
+          @endforeach --}}
+          <div class="container">
+            <div class="row">
+                @foreach ($detailFoto as $a)
+                <div class="col-md-4 grid-item">
+                  {{-- <img src="@php
+                    echo asset($a['lokasi_file']);
+                  @endphp" alt="Image 1"> --}}
+                  <div class="card">
+                    <img src="@php
+                    echo asset($a['lokasi_file']);
+                  @endphp" class="card-img-top" alt="...">
+                    <div class="card-body">
+                       <h5 class="card-title">Ini judul ceritanya</h5>
+                       <p class="card-text text-truncate">{{$a['deskripsi']}}</p>
+                       <!-- Tombol, Tautan, atau elemen lainnya -->
+                    </div>
+                 </div>
+              </div>
+                @endforeach
+            </div>
+        </div>
             </div>
           </div>
         </div>
@@ -174,34 +139,6 @@
     </div>
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
-    @php
-    if (Session::get('status_code') == 401) {
-      echo "<script>
-        Swal.fire({
-          icon: 'warning',
-          title: 'Album sudah ada',
-          text: 'Album yang kamu masukkan sudah ada, harap gunakan nama lain'
-        });
-        </script>";
-  
-    }
-    if (Session::get('status') == 200) {
-      echo "<script>Swal.fire({
-        icon: 'success',
-        title: 'Sukses',
-        text: 'File berhasil di upload'
-      });</script>";
-
-    }
-    if (Session::get('status') == 403) {
-      echo "<script>Swal.fire({
-        icon: 'warning',
-        title: 'Ekstensi Tidak diperbolehkan',
-        text: 'Ekstensi yang diperbolehkan hanya jpeg, jpg, dan png'
-      });</script>";
-
-    }
-@endphp
 </body>
 </html>
 
