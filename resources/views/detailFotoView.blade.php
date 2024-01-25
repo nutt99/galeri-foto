@@ -12,6 +12,14 @@
       .k :hover{
         background-color: rgb(156, 156, 156);
       }
+      .grid-item {
+            margin-bottom: 15px;
+        }
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -93,7 +101,7 @@
               </div>
             </div>
             <div class="row column-gap-3">
-              @foreach ($detailFoto as $a)
+              {{-- @foreach ($detailFoto as $a)
           <div class="container card col-2 m-1 text-center m-2">
             <a class="text-decoration-none " href="album/{{ $a['id'] }}" style="color: black">
               <div class="card-img-top mt-4"><i class="fas fa-folder" style="font-size:60px"></i></div>
@@ -102,7 +110,28 @@
             @endphp </div>
             </a>
           </div>
-          @endforeach
+          @endforeach --}}
+          <div class="container">
+            <div class="row">
+                @foreach ($detailFoto as $a)
+                <div class="col-md-4 grid-item">
+                  {{-- <img src="@php
+                    echo asset($a['lokasi_file']);
+                  @endphp" alt="Image 1"> --}}
+                  <div class="card">
+                    <img src="@php
+                    echo asset($a['lokasi_file']);
+                  @endphp" class="card-img-top" alt="...">
+                    <div class="card-body">
+                       <h5 class="card-title">Judul Kartu</h5>
+                       <p class="card-text">Deskripsi kartu.</p>
+                       <!-- Tombol, Tautan, atau elemen lainnya -->
+                    </div>
+                 </div>
+              </div>
+                @endforeach
+            </div>
+        </div>
             </div>
           </div>
         </div>

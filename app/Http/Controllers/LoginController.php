@@ -8,6 +8,7 @@ use App\Http\Controllers\FunctionListt;
 use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
+    
 
     public function logout(Request $request){
         $request->session()->flush();

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registrasi</title>
-    <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
   </head>
   <body>
     <div class="container mt-5" style="margin:auto">
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   </body>
 </html>
 

@@ -175,8 +175,15 @@
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @php
-    if (Session::get('status_code') == 403) {
-      echo "<script>window.alert('Album sudah ada')</script>";
+    if (Session::get('status_code') == 401) {
+      echo "<script>
+        Swal.fire({
+          icon: 'warning',
+          title: 'Album sudah ada',
+          text: 'Album yang kamu masukkan sudah ada, harap gunakan nama lain'
+        });
+        </script>";
+  
     }
     if (Session::get('status') == 200) {
       echo "<script>Swal.fire({
@@ -184,6 +191,7 @@
         title: 'Sukses',
         text: 'File berhasil di upload'
       });</script>";
+
     }
     if (Session::get('status') == 403) {
       echo "<script>Swal.fire({
@@ -191,6 +199,7 @@
         title: 'Ekstensi Tidak diperbolehkan',
         text: 'Ekstensi yang diperbolehkan hanya jpeg, jpg, dan png'
       });</script>";
+
     }
 @endphp
 </body>

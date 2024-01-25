@@ -31,11 +31,10 @@ class AlbumController extends Controller
             ]);
             return redirect()->intended("/home");
         } catch(Exception $e) {
-             echo $e->getMessage();
-            //  return redirect()->intended('/home')->with([
-            //      'status_code' => 403,
-            //      'message' => 'album sudah ada'
-            //  ]);
+              return redirect()->intended('/home')->with([
+                  'status_code' => 401,
+                  'message' => 'album sudah ada'
+              ]);
         }
     }
     private function cekEkstensi(Request $req){

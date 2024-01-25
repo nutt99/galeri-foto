@@ -36,3 +36,4 @@ Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
 
 Route::post('/create-album', [AlbumController::class, 'mkDirrr']);
 Route::post('/addPhoto', [AlbumController::class, 'upFoto']);
+
