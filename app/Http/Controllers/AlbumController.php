@@ -29,9 +29,9 @@ class AlbumController extends Controller
                 'userid' => $req->session()->get('uid'),
                 'visibilitas' => $req->visible,
             ]);
-            return redirect()->intended("/home");
+            return redirect()->intended("/dashboard");
         } catch(Exception $e) {
-              return redirect()->intended('/home')->with([
+              return redirect()->intended('/dashboard')->with([
                   'status_code' => 401,
                   'message' => 'album sudah ada'
               ]);
@@ -57,7 +57,7 @@ class AlbumController extends Controller
                     'lokasi_file' => "album_user/".explode("!!!", $req->albumName)[0]."/".$req->file("foto")->getClientOriginalName(),
                     'albumId' => explode("!!!", $req->albumName)[1],
                 ]);
-                return redirect()->intended('/home')->with([
+                return redirect()->intended('/dashboard')->with([
                     'status' => 200
                 ]);
             }catch(Exception $e){

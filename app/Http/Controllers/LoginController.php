@@ -12,7 +12,7 @@ class LoginController extends Controller
 
     public function logout(Request $request){
         $request->session()->flush();
-        return redirect()->intended('/');
+        return redirect()->intended('/login');
     }
     private function setChecker(Request $req){
         $fl = new FunctionListt;
@@ -21,7 +21,7 @@ class LoginController extends Controller
 
     public function loginView(Request $request){
         if($this->setChecker($request) == true){
-            return redirect()->intended('/home');
+            return redirect()->intended('/dashboard');
         }
         else{
             return view('login');
@@ -31,7 +31,7 @@ class LoginController extends Controller
         if($this->setChecker($req) == false){
             return view('register');
         }
-        return redirect()->intended('/home');
+        return redirect()->intended('/dashboard');
     }
     public function loginAction(Request $req){
         $row = Pengguna::firstWhere('username', '=',$req['username']) ?? [];
@@ -55,7 +55,7 @@ class LoginController extends Controller
             if(Hash::check($req->password, $row->password)){
                 $req->session()->put('username', $row->username);
                 $req->session()->put('uid', $row->id);
-                return redirect()->intended('/home');
+                return redirect()->intended('/dashboard');
             }
             else{
                 return view('login', ['status' => 403]);
@@ -71,7 +71,7 @@ class LoginController extends Controller
                 'email' => $req->email,
                 'nama_lengkap' => $fullname[0]
             ]);
-            return redirect()->intended('/')->with([
+            return redirect()->intended('/login')->with([
                 'status' => 400,
                 'message' => "Akun berhasil dibuat"
             ]);

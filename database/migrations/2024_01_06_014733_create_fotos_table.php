@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
             $table->string('lokasi_file');
             $table->integer('albumId');
+            $table->integer('userId');
             $table->timestamps();
         });
     }
