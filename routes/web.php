@@ -18,8 +18,11 @@ use App\Http\Controllers\HomeController;
 
 
 //login
-Route::get('/', [LoginController::class, 'loginView']);
-Route::post('/', [LoginController::class, 'loginAction']);
+Route::get('/login', [LoginController::class, 'loginView']);
+Route::post('/login', [LoginController::class, 'loginAction']);
+
+//beranda guest
+Route::get('/', [HomeController::class, 'berandaView']);
 
 //logout
 Route::get('/logout', [LoginController::class, 'logout']);
@@ -29,11 +32,11 @@ Route::get('/registrasi', [LoginController::class, 'registerView']);
 Route::post('/registrasi', [LoginController::class, 'registerPengguna']);
 
 //home
-Route::get('/home', [HomeController::class, 'homeView']);
+Route::get('/dashboard', [HomeController::class, 'homeView']);
 
 //detail album
 Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
 
+//action di album
 Route::post('/create-album', [AlbumController::class, 'mkDirrr']);
 Route::post('/addPhoto', [AlbumController::class, 'upFoto']);
-

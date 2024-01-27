@@ -15,7 +15,7 @@
                         <h4>Masuk terlebih dahulu</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="/">
+                        <form method="POST" action="/login">
                             @csrf
                             <div class="form-group">
                                 <label for="username">Username</label>
