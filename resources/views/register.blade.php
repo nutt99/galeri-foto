@@ -30,7 +30,7 @@
                                 <input name="email" type="email" class="form-control" id="email" placeholder="example@gmail.com">
                             </div>
                             <div class="form-group">
-                                <a href="/" class="text-decoration-none">Sudah punya akun? Ayo login</a>
+                                <a href="/login" class="text-decoration-none">Sudah punya akun? Ayo login</a>
                             </div>
                             <div class="text-center mt-3">
                                 <input type="submit" class="btn btn-primary text-center" value="Registrasi">

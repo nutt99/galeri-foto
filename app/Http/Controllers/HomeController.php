@@ -28,4 +28,7 @@ class HomeController extends Controller
             'foto' => Foto::orderBy(DB::raw('RAND()'))->get()
         ]);
     }
+    public function cekIp(Request $req){
+        echo $req->ip();
+    }
 }

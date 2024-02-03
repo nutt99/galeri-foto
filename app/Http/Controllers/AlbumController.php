@@ -56,6 +56,7 @@ class AlbumController extends Controller
                     'judul_foto' => $req->file("foto")->getClientOriginalName(),
                     'lokasi_file' => "album_user/".explode("!!!", $req->albumName)[0]."/".$req->file("foto")->getClientOriginalName(),
                     'albumId' => explode("!!!", $req->albumName)[1],
+                    'userId' => $req->session()->get('uid')
                 ]);
                 return redirect()->intended('/dashboard')->with([
                     'status' => 200

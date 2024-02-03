@@ -12,4 +12,7 @@ class Pengguna extends Model
         'id',
         'created_at'
     ];
+    public function fotos(){
+        return $this->hasMany(Foto::class, 'userId', 'id');
+    }
 }

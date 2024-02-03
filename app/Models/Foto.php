@@ -12,4 +12,7 @@ class Foto extends Model
         'id',
         'created_at'
     ];
+    public function pengguna(){
+        return $this->belongsTo(Pengguna::class, 'userId');
+    }
 }
