@@ -7,6 +7,32 @@
     <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
   </head>
   <body>
+    <div class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: black">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse justify-content-end navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Feature
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#content">Content</a></li>
+                  <li><a class="dropdown-item" href="#another">Another action</a></li>
+                  <li><a class="dropdown-item" href="#else">Something else here</a></li>
+                </ul>
+              </li>
+              
+              <a class="nav-link me-3 active" href="/login">Login</a>
+            <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>  
     <div class="container mt-5" style="margin:auto">
         <div class="row justify-content-center">
             <div class="col-md-6">

@@ -30,7 +30,6 @@
       </button>
       <div class="collapse justify-content-end navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#home">Home</a>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Feature
@@ -52,12 +51,12 @@
     <div class="row row-cols-2">
       <div class="col sticky-top" style="height:100vh;width:20%;background-color:black;">
         <div class="pt-5 ms-2">
-            <a class="text-decoration-none k" href="/home">
+            <a class="text-decoration-none k" href="/">
               <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
               Beranda
               </div>
             </a>
-          <a href="/" class="text-decoration-none k">
+          <a href="/dashboard" class="text-decoration-none k">
           <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
             Album
           </div>
@@ -86,7 +85,7 @@
       </div>
       <div class="modal-body container">
         <label for="AlbumName">Nama Album</label>
-        <input class="form-control" type="text" name="album_name" id="AlbumName" placeholder="Nama Album">
+        <input class="form-control" type="text" name="album_name" id="AlbumName" placeholder="Nama Album" required>
         <label for="AlbumName">Visibilitas</label>
         <select name="visible" class="form-select">
           <option value="publik">Publik</option>
@@ -117,7 +116,7 @@
             <div class="modal-body container">
               <div class="mb-3">
                 <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" id="formFile" name="foto">
+                <input class="form-control" type="file" id="formFile" name="foto" required>
               </div>              
               <label for="AlbumName">Visibilitas</label>
               <select name="albumName" class="form-select">

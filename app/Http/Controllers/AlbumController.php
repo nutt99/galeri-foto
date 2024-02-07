@@ -66,7 +66,7 @@ class AlbumController extends Controller
             }
         }
         else {
-            return redirect()->intended('/home')->with([
+            return redirect()->intended('/dashboard')->with([
                 'status' => 403
             ]);
         }

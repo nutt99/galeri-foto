@@ -44,7 +44,7 @@
                 </ul>
               </li>
               
-              <a class="nav-link me-3" href="#pricing">Pricing</a>
+              <a class="nav-link me-3" href="/login">Login</a>
             <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-light" type="submit">Search</button>
             </div>
