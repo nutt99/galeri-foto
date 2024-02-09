@@ -20,6 +20,9 @@
           'GRAD' 0,
           'opsz' 24
         }
+        .pointer-set:hover{
+            cursor: pointer
+        }
     </style>
 </head>
 <body>
@@ -36,20 +39,36 @@
                     <p class="fw-bold fs-4">ini deskripsi</p>
                     <p class="fs-5">Posted By</p>
                     <p class="fs-6">{{$foto->pengguna->username}}</p>
-                    {{-- Ikon kontol payah kali setting nya jembod, mending flutter --}}
-                    <label class="form-check-label">
-                        <input type="checkbox" name="like" id="likeId" style="opacity: 0">
-                        <div>
-                            <div class="row g-1">
-                                <div class="col">
-                                    <i class="material-icons material-symbols-outlined">favorite</i>
+                    <div class="row g-2">
+                        <div class="col">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="like" id="likeId" style="opacity: 0">
+                                    <div class="row g-1">
+                                        <div class="col pointer-set" onclick="changeIcon()">
+                                            <i class="material-icons material-symbols-outlined" id="likE">favorite</i>
+                                        </div>
+                                        <div class="col">
+                                            <p>Like</p>
+                                        </div>
                                 </div>
-                            <div class="col">
-                                <p>Like</p>
-                            </div>
-                            </div>
+                            </label>
                         </div>
-                    </label>
+                        <div class="col">
+                            <h6 style="opacity: 0">asd</h6>
+                            <label class="form-check-label">
+                                <a class="text-decoration-none text-dark" href="#komentar">
+                                    <div class="row g-1">
+                                        <div class="col">
+                                            <i class="material-icons material-symbols-outlined">comment</i>
+                                        </div>
+                                        <div class="col">
+                                            <p>Komentar</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,8 +76,15 @@
     @endif
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script>
-        var element = document.getElementById("likE");
-        if(element.classList)
+        function changeIcon(){
+            var element = document.getElementById("likE");
+        if(element.classList.contains("material-symbols-outlined")){
+            element.classList.remove("material-symbols-outlined");
+        }
+        else{
+            element.classList.add("material-symbols-outlined");
+        }
+        }
     </script>
 </body>
 </html>
