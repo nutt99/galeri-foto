@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Komentar extends Model
 {
     use HasFactory;
+    protected $guarded = [
+        'id',
+        'created_at'
+    ];
 }

@@ -26,6 +26,13 @@ Route::post('/login', [LoginController::class, 'loginAction']);
 Route::get('/', [HomeController::class, 'berandaView']);
 Route::get('/detail/{id}', [DetailController::class, 'detailFotoView']);
 
+//like action
+Route::post('/detail/{id}/like', [DetailController::class, 'addLike'])->name('like.action');
+Route::delete('/detail/{id}/unlike', [DetailController::class, 'unLike'])->name('unlike.action');
+
+//add komentar
+Route::post('/detail/{id}/komentar', [DetailController::class, 'addKomentar']);
+
 //logout
 Route::get('/logout', [LoginController::class, 'logout']);
 
@@ -42,5 +49,6 @@ Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
 //action di album
 Route::post('/create-album', [AlbumController::class, 'mkDirrr']);
 Route::post('/addPhoto', [AlbumController::class, 'upFoto']);
+
 
 // Route::get('/ip',[HomeController::class, 'cekIp']);

@@ -75,6 +75,7 @@
     </div>
     @endif
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
         function changeIcon(){
             var element = document.getElementById("likE");
@@ -85,6 +86,48 @@
             element.classList.add("material-symbols-outlined");
         }
         }
+    </script>
+    <script>
+        $("#likeId").change(function(){
+            var csrfToken = '{{ csrf_token() }}';
+            var isChecked = $(this).prop('checked');
+
+            if(isChecked == true) {
+                $.ajax({
+            url: "{{route('like.action', ['id' => $foto->id])}}",
+            method: "POST",
+            data: {
+                _token: csrfToken,
+                is_checked: isChecked,
+            },
+            success: function(response){
+                console.log(response.message);
+                console.log(isChecked);
+            },
+            error: function(xhr){
+                console.log("gagal");
+            }
+        });
+            }
+            else {
+                $.ajax({
+            url: "{{route('unlike.action', ['id' => $foto->id])}}",
+            method: "POST",
+            data: {
+                _method: "DELETE",
+                _token: csrfToken,
+                is_checked: isChecked,
+            },
+            success: function(response){
+                console.log(response.message);
+                console.log(isChecked);
+            },
+            error: function(xhr){
+                console.log("gagal");
+            }
+        });
+            }
+        })
     </script>
 </body>
 </html>
