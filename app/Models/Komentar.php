@@ -12,4 +12,10 @@ class Komentar extends Model
         'id',
         'created_at'
     ];
+    public function komentarable(){
+        return $this->morphTo();
+    }
+    public function pengguna(){
+        return $this->belongsTo(Pengguna::class);
+    }
 }

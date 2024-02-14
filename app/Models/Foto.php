@@ -15,4 +15,10 @@ class Foto extends Model
     public function pengguna(){
         return $this->belongsTo(Pengguna::class, 'userId');
     }
+    public function komentars(){
+        return $this->morphMany(Komentar::class, 'komentarable');
+    }
+    public function likefotos(){
+        return $this->morphMany(LikeFoto::class, 'likefotoable');
+    }
 }

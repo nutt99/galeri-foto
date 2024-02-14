@@ -12,4 +12,7 @@ class LikeFoto extends Model
         'id',
         'created_at'
     ];
+    public function likefotoable(){
+        return $this->morphTo();
+    }
 }

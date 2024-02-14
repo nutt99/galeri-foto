@@ -39,7 +39,8 @@
                     <p class="fw-bold fs-4">ini deskripsi</p>
                     <p class="fs-5">Posted By</p>
                     <p class="fs-6">{{$foto->pengguna->username}}</p>
-                    <div class="row g-2">
+                    @if (Session::get('uid') != null && Session::get('username') != null)
+                        <div class="row g-2">
                         <div class="col">
                             <label class="form-check-label">
                                 <input type="checkbox" name="like" id="likeId" style="opacity: 0">
@@ -48,7 +49,7 @@
                                             <i class="material-icons material-symbols-outlined" id="likE">favorite</i>
                                         </div>
                                         <div class="col">
-                                            <p>Like</p>
+                                            <p>@dd($foto->like)</p>
                                         </div>
                                 </div>
                             </label>
@@ -69,6 +70,7 @@
                             </label>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

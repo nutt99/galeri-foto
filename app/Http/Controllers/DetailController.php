@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class DetailController extends Controller
 {
     public function detailFotoView($id){
-        $foto = Foto::firstWhere('id', $id);
+        $foto = Foto::with(['komentars'])->firstWhere('id', $id);
         return view('detailFoto', [
             'foto' => $foto
         ]);
