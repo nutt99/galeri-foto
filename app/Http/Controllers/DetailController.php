@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class DetailController extends Controller
 {
     public function detailFotoView($id){
-        $foto = Foto::with(['komentars'])->firstWhere('id', $id);
+        $foto = Foto::with(['komentars', 'like_fotos'])->firstWhere('id', $id);
         return view('detailFoto', [
             'foto' => $foto
         ]);
@@ -21,7 +21,8 @@ class DetailController extends Controller
         if($isChecked == true){
             LikeFoto::create([
                 'fotoId' => $id,
-                'userId' => $req->session()->get('uid')
+                'userId' => $req->session()->get('uid'),
+                'likeType' => "App\Models\Foto"
             ]);
             return response()->json(['message' => "success di like, like nya $isChecked"], 200);
         } 

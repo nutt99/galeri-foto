@@ -49,7 +49,7 @@
                                             <i class="material-icons material-symbols-outlined" id="likE">favorite</i>
                                         </div>
                                         <div class="col">
-                                            <p>@dd($foto->like)</p>
+                                            <p id="likeCount">{{$foto->like_fotos->count()}}</p>
                                         </div>
                                 </div>
                             </label>
@@ -93,8 +93,10 @@
         $("#likeId").change(function(){
             var csrfToken = '{{ csrf_token() }}';
             var isChecked = $(this).prop('checked');
+            var likeCount = parseInt(document.getElementById("likeCount").textContent);
 
             if(isChecked == true) {
+                document.getElementById("likeCount").textContent = likeCount +=1;
                 $.ajax({
             url: "{{route('like.action', ['id' => $foto->id])}}",
             method: "POST",
@@ -112,6 +114,7 @@
         });
             }
             else {
+                document.getElementById("likeCount").textContent = likeCount -=1;
                 $.ajax({
             url: "{{route('unlike.action', ['id' => $foto->id])}}",
             method: "POST",

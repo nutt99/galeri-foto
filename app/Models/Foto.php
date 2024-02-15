@@ -16,9 +16,9 @@ class Foto extends Model
         return $this->belongsTo(Pengguna::class, 'userId');
     }
     public function komentars(){
-        return $this->morphMany(Komentar::class, 'komentarable');
+        return $this->morphMany(Komentar::class, 'komentarable', 'id', 'id');
     }
-    public function likefotos(){
-        return $this->morphMany(LikeFoto::class, 'likefotoable');
+    public function like_fotos(){
+        return $this->morphMany(LikeFoto::class, 'likefotoable', 'likeType', 'fotoId');
     }
 }

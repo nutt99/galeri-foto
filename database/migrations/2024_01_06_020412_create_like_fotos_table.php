@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('fotoId');
             $table->integer('userId');
+            $table->string('likeType');
             $table->timestamps();
         });
     }
