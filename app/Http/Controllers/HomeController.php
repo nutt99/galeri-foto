@@ -21,11 +21,14 @@ class HomeController extends Controller
             return view('home', [
                 'album' => $album,
             ]);
-        }
+        }   
     }
     public function berandaView(){
         return view('beranda', [
             'foto' => Foto::orderBy(DB::raw('RAND()'))->get()
         ]);
+    }
+    public function getIp(Request $req){
+        return $req->ip();
     }
 }

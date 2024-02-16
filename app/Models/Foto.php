@@ -12,4 +12,13 @@ class Foto extends Model
         'id',
         'created_at'
     ];
+    public function pengguna(){
+        return $this->belongsTo(Pengguna::class, 'userId');
+    }
+    public function komentars(){
+        return $this->morphMany(Komentar::class, 'komentarable', 'id', 'id');
+    }
+    public function like_fotos(){
+        return $this->morphMany(LikeFoto::class, 'likefotoable', 'likeType', 'fotoId');
+    }
 }

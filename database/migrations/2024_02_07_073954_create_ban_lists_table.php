@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('komentars', function (Blueprint $table) {
+        Schema::create('ban_lists', function (Blueprint $table) {
             $table->id();
-            $table->integer('fotoId');
-            $table->integer('userId');
-            $table->text('komentar');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('komentars');
+        Schema::dropIfExists('ban_lists');
     }
 };

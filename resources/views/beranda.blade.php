@@ -44,7 +44,7 @@
                 </ul>
               </li>
               
-              <a class="nav-link me-3" href="#pricing">Pricing</a>
+              <a class="nav-link me-3" href="/login">Login</a>
             <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-light" type="submit">Search</button>
             </div>
@@ -54,12 +54,12 @@
           <div class="ms-3 me-3 mt-3">
             <section class="flex" id="photos">
               @foreach ($foto as $a)
-                  <a class="text-decoration-none" href="{{$a['id']}}">
+                  <a class="text-decoration-none" href="detail/{{$a['id']}}">
                     <div class="overflow-y-hidden">
                       <img src="@php
                     echo asset($a['lokasi_file']);
-                  @endphp" class="img-fluid" alt="...">
-                  <h6 class="text-truncate">Ini deskripsi</h6>
+                  @endphp" class="img-fluid border" alt="..." style="border-radius: 25px">
+                  <h6 class="text-truncate text-dark fw-bold ps-2">Ini deskripsi</h6>
                     </div>
                   </a>
               @endforeach
