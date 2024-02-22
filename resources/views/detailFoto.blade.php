@@ -70,6 +70,28 @@
                             </label>
                         </div>
                     </div>
+                    <div class="container border-top border-2 overflow-auto" style="max-height: 450px">
+                        <p class="fs-6 fw-bold mt-3">Ini username</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ad harum praesentium veniam voluptatum tenetur optio fuga, maiores ratione ipsum vel inventore laudantium at perspiciatis? Ipsum, labore. Repellat, enim maiores?
+                        Repellendus, alias fugit, perspiciatis et illum dolores minima placeat cum rem nobis quaerat ducimus nostrum in assumenda inventore numquam tempore at nihil culpa ea quis exercitationem qui dolor aperiam. Sapiente.
+                        Quisquam, soluta. Quaerat, commodi et! Corporis dolor adipisci temporibus, commodi asperiores architecto beatae atque eum ut earum praesentium et libero harum ducimus fugit autem reiciendis quam facilis obcaecati accusantium quod?</p>
+                        <p class="fs-6 fw-bold mt-3">Ini username</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ad harum praesentium veniam voluptatum tenetur optio fuga, maiores ratione ipsum vel inventore laudantium at perspiciatis? Ipsum, labore. Repellat, enim maiores?
+                        Repellendus, alias fugit, perspiciatis et illum dolores minima placeat cum rem nobis quaerat ducimus nostrum in assumenda inventore numquam tempore at nihil culpa ea quis exercitationem qui dolor aperiam. Sapiente.
+                        Quisquam, soluta. Quaerat, commodi et! Corporis dolor adipisci temporibus, commodi asperiores architecto beatae atque eum ut earum praesentium et libero harum ducimus fugit autem reiciendis quam facilis obcaecati accusantium quod?</p>
+                        <p class="fs-6 fw-bold mt-3">Ini username</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ad harum praesentium veniam voluptatum tenetur optio fuga, maiores ratione ipsum vel inventore laudantium at perspiciatis? Ipsum, labore. Repellat, enim maiores?
+                        Repellendus, alias fugit, perspiciatis et illum dolores minima placeat cum rem nobis quaerat ducimus nostrum in assumenda inventore numquam tempore at nihil culpa ea quis exercitationem qui dolor aperiam. Sapiente.
+                        Quisquam, soluta. Quaerat, commodi et! Corporis dolor adipisci temporibus, commodi asperiores architecto beatae atque eum ut earum praesentium et libero harum ducimus fugit autem reiciendis quam facilis obcaecati accusantium quod?</p>
+                        <p class="fs-6 fw-bold mt-3">Ini username</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ad harum praesentium veniam voluptatum tenetur optio fuga, maiores ratione ipsum vel inventore laudantium at perspiciatis? Ipsum, labore. Repellat, enim maiores?
+                        Repellendus, alias fugit, perspiciatis et illum dolores minima placeat cum rem nobis quaerat ducimus nostrum in assumenda inventore numquam tempore at nihil culpa ea quis exercitationem qui dolor aperiam. Sapiente.
+                        Quisquam, soluta. Quaerat, commodi et! Corporis dolor adipisci temporibus, commodi asperiores architecto beatae atque eum ut earum praesentium et libero harum ducimus fugit autem reiciendis quam facilis obcaecati accusantium quod?</p>
+                    </div>
+                    <div class="row mt-5">
+                        <input type="email" class="form-control col border border-dark me-1" id="exampleFormControlInput1" placeholder="Komentar">
+                        <button type="button" class="btn btn-dark col-3">Dark</button>
+                    </div>
                     @endif
                 </div>
             </div>

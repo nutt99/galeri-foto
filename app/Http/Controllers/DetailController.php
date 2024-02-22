@@ -36,10 +36,17 @@ class DetailController extends Controller
             Komentar::create([
                 'fotoId' => $id,
                 'userId' => $req->session()->get('uid'),
+                'komentarType' => "App\Models\Foto",
                 'komentar' => $req->komentar
             ]);
+            return response()->json([
+                'message' => "sukses"
+            ], 200);
         } catch(\Exception $e){
             echo $e->getMessage();
+            return response()->json([
+                'message' => "gagal"
+            ], 400);
         }
     }
 }
