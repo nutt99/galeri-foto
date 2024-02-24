@@ -70,27 +70,15 @@
                             </label>
                         </div>
                     </div>
-                    <div class="container border-top border-2 overflow-auto" style="max-height: 450px">
-                        <p class="fs-6 fw-bold mt-3">Ini username</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ad harum praesentium veniam voluptatum tenetur optio fuga, maiores ratione ipsum vel inventore laudantium at perspiciatis? Ipsum, labore. Repellat, enim maiores?
-                        Repellendus, alias fugit, perspiciatis et illum dolores minima placeat cum rem nobis quaerat ducimus nostrum in assumenda inventore numquam tempore at nihil culpa ea quis exercitationem qui dolor aperiam. Sapiente.
-                        Quisquam, soluta. Quaerat, commodi et! Corporis dolor adipisci temporibus, commodi asperiores architecto beatae atque eum ut earum praesentium et libero harum ducimus fugit autem reiciendis quam facilis obcaecati accusantium quod?</p>
-                        <p class="fs-6 fw-bold mt-3">Ini username</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ad harum praesentium veniam voluptatum tenetur optio fuga, maiores ratione ipsum vel inventore laudantium at perspiciatis? Ipsum, labore. Repellat, enim maiores?
-                        Repellendus, alias fugit, perspiciatis et illum dolores minima placeat cum rem nobis quaerat ducimus nostrum in assumenda inventore numquam tempore at nihil culpa ea quis exercitationem qui dolor aperiam. Sapiente.
-                        Quisquam, soluta. Quaerat, commodi et! Corporis dolor adipisci temporibus, commodi asperiores architecto beatae atque eum ut earum praesentium et libero harum ducimus fugit autem reiciendis quam facilis obcaecati accusantium quod?</p>
-                        <p class="fs-6 fw-bold mt-3">Ini username</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ad harum praesentium veniam voluptatum tenetur optio fuga, maiores ratione ipsum vel inventore laudantium at perspiciatis? Ipsum, labore. Repellat, enim maiores?
-                        Repellendus, alias fugit, perspiciatis et illum dolores minima placeat cum rem nobis quaerat ducimus nostrum in assumenda inventore numquam tempore at nihil culpa ea quis exercitationem qui dolor aperiam. Sapiente.
-                        Quisquam, soluta. Quaerat, commodi et! Corporis dolor adipisci temporibus, commodi asperiores architecto beatae atque eum ut earum praesentium et libero harum ducimus fugit autem reiciendis quam facilis obcaecati accusantium quod?</p>
-                        <p class="fs-6 fw-bold mt-3">Ini username</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ad harum praesentium veniam voluptatum tenetur optio fuga, maiores ratione ipsum vel inventore laudantium at perspiciatis? Ipsum, labore. Repellat, enim maiores?
-                        Repellendus, alias fugit, perspiciatis et illum dolores minima placeat cum rem nobis quaerat ducimus nostrum in assumenda inventore numquam tempore at nihil culpa ea quis exercitationem qui dolor aperiam. Sapiente.
-                        Quisquam, soluta. Quaerat, commodi et! Corporis dolor adipisci temporibus, commodi asperiores architecto beatae atque eum ut earum praesentium et libero harum ducimus fugit autem reiciendis quam facilis obcaecati accusantium quod?</p>
+                    <div class="container border-top border-2 overflow-auto" style="max-height: 450px" id="komenContainer">
+                    @foreach ($foto->komentars as $a)
+                        <p class="fs-6 fw-bold mt-3">{{$a->pengguna->username}}</p>
+                        <p>{{$a->komentar}}</p>
+                    @endforeach
                     </div>
                     <div class="row mt-5">
-                        <input type="email" class="form-control col border border-dark me-1" id="exampleFormControlInput1" placeholder="Komentar">
-                        <button type="button" class="btn btn-dark col-3">Dark</button>
+                        <input type="text" name="komentar" class="form-control col border border-dark me-1" id="fieldKomentar" placeholder="Komentar">
+                        <button type="button" class="btn btn-dark col-3" onclick="sendKomentar()">Kirim</button>
                     </div>
                     @endif
                 </div>
@@ -109,6 +97,33 @@
         else{
             element.classList.add("material-symbols-outlined");
         }
+        }
+        function sendKomentar(){
+            var csrfToken = '{{ csrf_token() }}';
+            var check_field = document.getElementById("fieldKomentar").value != '' ? true : false;
+            var komenValue = document.getElementById("fieldKomentar").value;
+            if(check_field == true){
+                 $.ajax({
+                 url: "{{route('addKomen.action', ['id' => $foto->id])}}", 
+                 method: "POST",
+                 data: {
+                     _token: csrfToken,
+                     komentar:  document.getElementById("fieldKomentar").value,
+                 },
+                 success: function(response){
+                    console.log(response.message);
+                    document.getElementById('fieldKomentar').value = '';
+                    $('#komenContainer').append("<p class='fs-6 fw-bold mt-3'>{{Session::get('username')}}</p><p>"+komenValue+"</p>");
+                 },
+                 error: function(response){
+                    console.log(response.message);
+                 }
+             });
+            console.log('field berisi');
+            } 
+            else{
+                console.log('field tidak boleh kosong');
+            }
         }
     </script>
     <script>

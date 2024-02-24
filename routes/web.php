@@ -31,7 +31,7 @@ Route::post('/detail/{id}/like', [DetailController::class, 'addLike'])->name('li
 Route::delete('/detail/{id}/unlike', [DetailController::class, 'unLike'])->name('unlike.action');
 
 //add komentar
-Route::post('/detail/{id}/komentar', [DetailController::class, 'addKomentar']);
+Route::post('/detail/{id}/komentar', [DetailController::class, 'addKomentar'])->name('addKomen.action');
 
 //logout
 Route::get('/logout', [LoginController::class, 'logout']);

@@ -32,7 +32,6 @@ class DetailController extends Controller
         return response()->json(['message' => "sukses dihapus"], 200);
     }
     public function addKomentar(Request $req, $id){
-        try{
             Komentar::create([
                 'fotoId' => $id,
                 'userId' => $req->session()->get('uid'),
@@ -42,11 +41,5 @@ class DetailController extends Controller
             return response()->json([
                 'message' => "sukses"
             ], 200);
-        } catch(\Exception $e){
-            echo $e->getMessage();
-            return response()->json([
-                'message' => "gagal"
-            ], 400);
-        }
     }
 }
