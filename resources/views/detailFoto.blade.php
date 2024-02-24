@@ -70,6 +70,16 @@
                             </label>
                         </div>
                     </div>
+                    <div class="container border-top border-2 overflow-auto" style="max-height: 450px" id="komenContainer">
+                    @foreach ($foto->komentars as $a)
+                        <p class="fs-6 fw-bold mt-3">{{$a->pengguna->username}}</p>
+                        <p>{{$a->komentar}}</p>
+                    @endforeach
+                    </div>
+                    <div class="row mt-5">
+                        <input type="text" name="komentar" class="form-control col border border-dark me-1" id="fieldKomentar" placeholder="Komentar">
+                        <button type="button" class="btn btn-dark col-3" onclick="sendKomentar()">Kirim</button>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -87,6 +97,33 @@
         else{
             element.classList.add("material-symbols-outlined");
         }
+        }
+        function sendKomentar(){
+            var csrfToken = '{{ csrf_token() }}';
+            var check_field = document.getElementById("fieldKomentar").value != '' ? true : false;
+            var komenValue = document.getElementById("fieldKomentar").value;
+            if(check_field == true){
+                 $.ajax({
+                 url: "{{route('addKomen.action', ['id' => $foto->id])}}", 
+                 method: "POST",
+                 data: {
+                     _token: csrfToken,
+                     komentar:  document.getElementById("fieldKomentar").value,
+                 },
+                 success: function(response){
+                    console.log(response.message);
+                    document.getElementById('fieldKomentar').value = '';
+                    $('#komenContainer').append("<p class='fs-6 fw-bold mt-3'>{{Session::get('username')}}</p><p>"+komenValue+"</p>");
+                 },
+                 error: function(response){
+                    console.log(response.message);
+                 }
+             });
+            console.log('field berisi');
+            } 
+            else{
+                console.log('field tidak boleh kosong');
+            }
         }
     </script>
     <script>
