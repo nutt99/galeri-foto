@@ -24,8 +24,11 @@ class HomeController extends Controller
         }   
     }
     public function berandaView(){
+        $rawFoto = Foto::with('albums')->whereHas('albums', function($query){
+            $query->where('visibilitas', '=', 'publik');
+        });
         return view('beranda', [
-            'foto' => Foto::orderBy(DB::raw('RAND()'))->get()
+            'foto' => $rawFoto->orderBy(DB::raw('RAND()'))->get()
         ]);
     }
     public function getIp(Request $req){

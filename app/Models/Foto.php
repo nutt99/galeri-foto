@@ -21,4 +21,10 @@ class Foto extends Model
     public function like_fotos(){
         return $this->morphMany(LikeFoto::class, 'likefotoable', 'likeType', 'fotoId');
     }
+    public function fotoable(){
+        return $this->morphTo();
+    }
+    public function albums(){
+        return $this->belongsTo(Album::class, 'albumId');
+    }
 }
