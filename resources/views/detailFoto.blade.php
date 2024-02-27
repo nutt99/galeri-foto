@@ -43,11 +43,21 @@
                         <div class="row g-2">
                         <div class="col">
                             <label class="form-check-label">
+                                @if ($ceklike == false)
                                 <input type="checkbox" name="like" id="likeId" style="opacity: 0">
+                                @elseif ($ceklike == true)
+                                <input type="checkbox" name="like" id="likeId" style="opacity: 0" checked>
+                                @endif
                                     <div class="row g-1">
+                                        @if ($ceklike == false)
                                         <div class="col pointer-set" onclick="changeIcon()">
                                             <i class="material-icons material-symbols-outlined" id="likE">favorite</i>
                                         </div>
+                                        @elseif ($ceklike == true)
+                                        <div class="col pointer-set" onclick="changeIcon()">
+                                            <i class="material-icons" id="likE">favorite</i>
+                                        </div>
+                                        @endif
                                         <div class="col">
                                             <p id="likeCount">{{$foto->like_fotos->count()}}</p>
                                         </div>
