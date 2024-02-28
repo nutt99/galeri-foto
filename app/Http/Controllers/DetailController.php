@@ -12,17 +12,18 @@ class DetailController extends Controller
 {
     public function detailFotoView(Request $req, $id){
         $foto = Foto::with(['komentars', 'like_fotos'])->firstWhere('id', $id);
+        $ceklike = false;
          foreach($foto->like_fotos as $like){
              if($req->session()->get('uid') == $like->userId){
-                $like = true;
+                $ceklike = true;
             }
              elseif($req->session()->get('uid') == $like->userId){
-                $like = false;
+                $ceklike = false;
              }
          }
         return view('detailFoto', [
             'foto' => $foto,
-            'ceklike' => $like
+            'ceklike' => $ceklike
         ]);
     }
     public function addLike(Request $req, $id){

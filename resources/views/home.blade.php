@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}"/>
     <title>Beranda</title>
     <style>
       .k :hover{
@@ -164,6 +164,10 @@
               echo explode("@", $a['nama_album'])[0];
             @endphp </div>
             </a>
+            <div class="row p-2">
+              <div class="col"><i class="fas fa-edit text-info"></i></div>
+              <div class="col"><i class="fas fa-trash text-danger"></i></div>
+            </div>
           </div>
           @endforeach
             </div>

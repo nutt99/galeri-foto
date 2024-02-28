@@ -50,5 +50,10 @@ Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
 Route::post('/create-album', [AlbumController::class, 'mkDirrr']);
 Route::post('/addPhoto', [AlbumController::class, 'upFoto']);
 
+//album action
+Route::get('/getAlbumInfo', [AlbumController::class, 'getAlbumInfo'])->name('albuminfo');
+Route::put('/editAlbum', [AlbumController::class, 'editAlbum'])->name('editAlbum');
+Route::delete('/deleteAlbum', [AlbumController::class, 'deleteAlbum'])->name('deleteAlbum');
+
 
 // Route::get('/ip',[HomeController::class, 'cekIp']);
