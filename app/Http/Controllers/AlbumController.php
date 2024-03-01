@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Models\Album;
 use App\Models\Foto;
+use Illuminate\Support\Facades\File;
 
 class AlbumController extends Controller
 {
@@ -47,6 +48,7 @@ class AlbumController extends Controller
         }
         return $res;
     }
+
     public function upFoto(Request $req){
         if($this->cekEkstensi($req) == true){
             try{
@@ -70,5 +72,33 @@ class AlbumController extends Controller
                 'status' => 403
             ]);
         }
+    }
+
+    public function getAlbumInfo(Request $req){
+        $id = $req->input('idAlbum');
+        $album = Album::firstWhere('id', $id);
+        return response()->json([
+            'data' => $album
+        ], 200);
+    }
+    public function editAlbum(Request $req){
+        $id = $req->input('idAlbum');
+        $albumName = $req->input('albumName');
+        $description = $req->input('deskripsi');
+        $visible = $req->input('visible');
+        Album::firstWhere('id', $id);
+    }
+    public function deleteAlbum(Request $req){
+        $id = $req->input('idAlbum');
+        $album = Album::firstWhere('id', $id);
+        $pathAlbum = system('cd')."\\album_user\\".$album->nama_album;
+        File::cleanDirectory($pathAlbum);
+        rmdir($pathAlbum);
+        $foto = Foto::where('albumId', $id)->get();
+        foreach($foto as $a){
+            Foto::firstWhere('id', $a['id'])->delete();
+        }
+        $album->delete();
+        return redirect()->intended('/dashboard');
     }
 }

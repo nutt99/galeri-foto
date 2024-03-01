@@ -165,8 +165,8 @@
             @endphp </div>
             </a>
             <div class="row p-2">
-              <div class="col"><i class="fas fa-edit text-info"></i></div>
-              <div class="col"><i class="fas fa-trash text-danger"></i></div>
+              <div class="col"><i class="fas fa-edit text-info" onclick=""></i></div>
+              <div class="col"><i class="fas fa-trash text-danger" onclick="deleteAlbum({{$a['id']}})"></i></div>
             </div>
           </div>
           @endforeach
@@ -177,6 +177,29 @@
     </div>
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
+    <script src="{{asset('jquery/jquery.min.js')}}"></script>
+    <script>
+      function deleteAlbum(id){
+        var csrfToken = "{{csrf_token()}}";
+        $.ajax({
+          url: "{{ route('deleteAlbum') }}",
+          method: "POST",
+          data: {
+            _token: csrfToken,
+            _method: "DELETE",
+            idAlbum: id,
+          },
+          success: function(response){
+            console.log(response.message);
+            console.log(response.path_now);
+          },
+          error: function(xhr){
+            console.log('gagal');
+          },
+        });
+      }
+    </script>
+    
     @php
     if (Session::get('status_code') == 401) {
       echo "<script>

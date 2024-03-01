@@ -97,7 +97,7 @@
     </div>
     @endif
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{{asset('jquery/jquery.min.js')}}"></script>
     <script>
         function changeIcon(){
             var element = document.getElementById("likE");
