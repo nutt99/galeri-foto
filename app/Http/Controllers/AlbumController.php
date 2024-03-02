@@ -82,23 +82,36 @@ class AlbumController extends Controller
         ], 200);
     }
     public function editAlbum(Request $req){
-        $id = $req->input('idAlbum');
-        $albumName = $req->input('albumName');
-        $description = $req->input('deskripsi');
-        $visible = $req->input('visible');
-        Album::firstWhere('id', $id);
+        $id = $req->idAlbumm;
+        $albumName = $req->namaAlbum;
+        $deskripsi = $req->deskripsi ?? "";
+        $visible = $req->visibilitas;
+        $album = Album::firstWhere('id', $id);
+
+        // rename("album_user/".$album->nama_album, "album_user/".$albumName."@".$req->session()->get('username'));
+
+        // $album->nama_album = $albumName."@".$req->session()->get('username');
+        $album->deskripsi = $deskripsi;
+        $album->visibilitas = $visible;
+        $album->save();
+
+        return back();
     }
     public function deleteAlbum(Request $req){
-        $id = $req->input('idAlbum');
+        $id = $req->idAlbum;
         $album = Album::firstWhere('id', $id);
         $pathAlbum = system('cd')."\\album_user\\".$album->nama_album;
         File::cleanDirectory($pathAlbum);
         rmdir($pathAlbum);
         $foto = Foto::where('albumId', $id)->get();
-        foreach($foto as $a){
-            Foto::firstWhere('id', $a['id'])->delete();
+
+        if($foto->count() >= 1){
+            foreach($foto as $a){
+                Foto::firstWhere('id', $a['id'])->delete();
+            }
         }
+
         $album->delete();
-        return redirect()->intended('/dashboard');
+        return back();
     }
 }

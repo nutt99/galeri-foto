@@ -138,13 +138,69 @@
       </div>
     
       {{-- end modal 2 --}}
+      {{-- modal 3 warning untuk hapus --}}
+      <div class="modal fade" id="deletePhoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <form action="{{route('deleteAlbum')}}" method="post">
+          @csrf
+          @method('DELETE')
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Apakah anda yakin ingin menghapus album?</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="idAlbum" id="albumIdd">
+              Menghapus album akan otomatis menghapus semua foto di dalam nya, Apakah anda tetap ingin menghapus nya?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-danger">Oke</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- end modal 3 --}}
+      {{-- modal 4 untuk update album --}}
+      <div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <form action="{{route('editAlbum')}}" method="POST">
+            @csrf
+            @method('PUT')
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Album</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="idAlbumm" id="idAlbumm">
+              {{-- <label for="exampleInputEmail1" class="form-label">Nama Album</label>
+              <input type="text" class="form-control" name="namaAlbum" id="namaAlbum" aria-describedby="namaAlbum"> --}}
+
+              <label for="deskripsi" class="form-label">Deskripsi Album</label>
+              <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi"></textarea>
+
+              <label for="visible">Visibilitas Album</label>
+              <select name="visibilitas" class="form-select" id="visible">
+                <option value="publik" id="public">Publik</option>
+                <option value="folower" id="follower">Folower</option>
+                <option value="private" id="private">Private</option>
+              </select>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Kirim</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- end modal 4 --}}
       <div style="width:80%">
         <div class="row m-2 mt-3 ms-3">
-          {{-- @for ($i = 1; $i < 240; $i++)
-          <div class="container card col-2 m-1">
-            <div class="card-body">Ini contoh {{$i}} </div>
-          </div>
-          @endfor --}}
+          
           <div class="row">
             <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2">
               <div class="d-flex justify-content-between align-items-center">
@@ -165,8 +221,8 @@
             @endphp </div>
             </a>
             <div class="row p-2">
-              <div class="col"><i class="fas fa-edit text-info" onclick=""></i></div>
-              <div class="col"><i class="fas fa-trash text-danger" onclick="deleteAlbum({{$a['id']}})"></i></div>
+              <div class="col"><i class="fas fa-edit text-info" onclick="updateAlbum( '{{$a['id']}}', '{{$a['nama_album']}}', '{{ $a['deskripsi'] }}', '{{ $a['visibilitas'] }}' )" style="cursor: pointer" data-bs-target="#updateModal" data-bs-toggle="modal"></i></div>
+              <div class="col"><i class="fas fa-trash text-danger" onclick="deleteAlbum('{{$a['id']}}')" data-bs-toggle="modal" data-bs-target="#deletePhoto" style="cursor: pointer"></i></div>
             </div>
           </div>
           @endforeach
@@ -180,23 +236,12 @@
     <script src="{{asset('jquery/jquery.min.js')}}"></script>
     <script>
       function deleteAlbum(id){
-        var csrfToken = "{{csrf_token()}}";
-        $.ajax({
-          url: "{{ route('deleteAlbum') }}",
-          method: "POST",
-          data: {
-            _token: csrfToken,
-            _method: "DELETE",
-            idAlbum: id,
-          },
-          success: function(response){
-            console.log(response.message);
-            console.log(response.path_now);
-          },
-          error: function(xhr){
-            console.log('gagal');
-          },
-        });
+        document.getElementById("albumIdd").value = id;
+      }
+      function updateAlbum(id, namaAlbum, deskripsi, visible){
+        document.getElementById("idAlbumm").value = id;
+        document.getElementById("deskripsi").value = deskripsi;
+        document.getElementById("visible").value = visible;        
       }
     </script>
     
