@@ -45,10 +45,12 @@ Route::get('/dashboard', [HomeController::class, 'homeView']);
 
 //detail album
 Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
+Route::delete('/album/{id_album}', [AlbumController::class, 'deleteFoto'])->name('deleteFoto.action');
 
 //action di album
 Route::post('/create-album', [AlbumController::class, 'mkDirrr']);
 Route::post('/addPhoto', [AlbumController::class, 'upFoto']);
+Route::post('/upDetail', [AlbumController::class, 'upFotoDetail'])->name('detailUp');
 
 //album action
 // Route::get('/getAlbumInfo', [AlbumController::class, 'getAlbumInfo'])->name('albuminfo');

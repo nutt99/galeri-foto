@@ -17,6 +17,8 @@ class AlbumController extends Controller
         $namaAlbum = explode("@", $album['nama_album'])[0];
         return view('detailFotoView', [
             'namaAlbum' => $namaAlbum,
+            'albumId' => $id_album,
+            'visible' => $album->visibilitas,
             'detailFoto' => $detailFoto
         ]);
     }
@@ -73,6 +75,30 @@ class AlbumController extends Controller
             ]);
         }
     }
+    public function upFotoDetail(Request $req){
+        if($this->cekEkstensi($req) == true){
+            try{
+                $file = $req->file("foto");
+                $file->move("album_user/".$req->albumName."@".$req->session()->get('username'), $file->getClientOriginalName());
+                Foto::create([
+                    'judul_foto' => $req->file("foto")->getClientOriginalName(),
+                    'lokasi_file' => "album_user/".$req->albumName."@".$req->session()->get('username')."/".$req->file("foto")->getClientOriginalName(),
+                    'albumId' => $req->albumId,
+                    'userId' => $req->session()->get('uid')
+                ]);
+                return back()->with([
+                    'status' => 200
+                ]);
+            }catch(Exception $e){
+                echo $e->getMessage();
+            }
+        }
+        else {
+            return redirect()->intended('/dashboard')->with([
+                'status' => 403
+            ]);
+        }
+    }
 
     public function getAlbumInfo(Request $req){
         $id = $req->input('idAlbum');
@@ -113,5 +139,18 @@ class AlbumController extends Controller
 
         $album->delete();
         return back();
+    }
+    public function deleteFoto(Request $req, $id_album){
+        $arrFoto = $req->input("arrFoto");
+
+        foreach($arrFoto as $a){
+           $foto =  Foto::firstWhere('id', $a);
+            unlink($foto->lokasi_file);
+            $foto->delete();
+        }
+        return response()->json([
+            'message' => "success",
+            'code' => 200
+        ], 200);
     }
 }

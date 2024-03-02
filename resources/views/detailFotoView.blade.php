@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}"/>
     <title>Beranda</title>
     <style>
       .k :hover{
@@ -25,7 +25,7 @@
 <body>
   <div class="container">
     <div class="fixed-bottom mb-4 me-5 text-end">
-      <button class="rounded-pill text-light border-0 text-center p-2 pe-1 fs-5" data-bs-toggle="modal" data-bs-target="#addPhoto" style="background-color: black;">
+      <button class="rounded-pill text-light border-0 text-center p-2 pe-1 fs-5" data-bs-toggle="modal" data-bs-target="#addPhotoDetail" style="background-color: black;">
         <i class="fa fa-image text-light"></i> Foto + 
       </button>
     </div>
@@ -82,6 +82,61 @@
         </div>
       </div>
       {{-- end navbar --}}
+      {{-- Modal 2 --}}
+      <div class="modal fade" id="addPhotoDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <form action="{{route('detailUp')}}" method="POST" enctype="multipart/form-data">
+            @csrf
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambahkan Foto</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body container">
+              <div class="mb-3">
+                <input type="hidden" name="albumId" value="{{$albumId}}">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" id="formFile" name="foto" required>
+              </div>              
+              <label for="AlbumName">Album</label>
+              <select name="albumName" class="form-select">
+                
+                  <option value="{{ $namaAlbum }}">{{$namaAlbum}} ({{ $visible }})</option>
+                
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input type="submit" class="btn text-light" style="background-color: black" value="Buat">
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- end modal 2 --}}
+      {{-- modal 3 warning untuk hapus --}}
+      <div class="modal fade" id="deletePhoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          {{-- <form action="" method="post">
+          @csrf
+          @method('DELETE') --}}
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Hapus Foto</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Batal</button>
+              <button type="button" class="btn btn-danger" id="okeModal" onclick="okeModal()">Oke</button>
+            {{-- </form> --}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- end modal 3 --}}
       <div style="width:80%">
         <div class="row m-2 mt-3 ms-3">
           {{-- @for ($i = 1; $i < 240; $i++)
@@ -89,11 +144,19 @@
             <div class="card-body">Ini contoh {{$i}} </div>
           </div>
           @endfor --}}
+          <button id="modalTriger" class="d-none" data-bs-toggle="modal" data-bs-target="#deletePhoto"></button>
           <div class="row">
             <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2">
               <div class="d-flex justify-content-between align-items-center">
                 <h2>{{ $namaAlbum }}</h2>
-                {{-- <a href="/create-album" class="text-decoration-none"><h5 class="rounded-pill p-2 text-light text-center" style="background-color: black">Tambah +</h5></a> --}}
+                <div class="row">
+                  <i class="fas fa-times close-icon col d-none" id="closeHapus" onclick="backTrash()" style="cursor: pointer"></i>
+                <label for="hapusFoto" class="col" id="lblHapusFoto">
+                  <i class="fas fa-trash text-danger" style="cursor: pointer"></i>
+                  <input class="d-none" type="checkbox" id="hapusFoto" onchange="disableCkFoto()" checked>
+                </label>
+                <i class="fas fa-solid fa-check col d-none" id="okeHapus" style="cursor: pointer" onclick="modalDelete()"></i>
+                </div>
                 <button type="button" class="rounded-pill text-light border-0 text-center p-1 fs-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: black">
                   Tambah +
                 </button>
@@ -114,18 +177,18 @@
             <div class="row">
                 @foreach ($detailFoto as $a)
                 <div class="col-md-4 grid-item">
-                  {{-- <img src="@php
-                    echo asset($a['lokasi_file']);
-                  @endphp" alt="Image 1"> --}}
                   <div class="card">
+                    <label>
                     <img src="@php
                     echo asset($a['lokasi_file']);
                   @endphp" class="card-img-top" alt="...">
                     <div class="card-body">
+                      <input class="ckfoto" value="{{$a['id']}}" type="checkbox" name="foto[]" id="ckfoto" disabled>
                        <h5 class="card-title">Ini judul ceritanya</h5>
                        <p class="card-text text-truncate">{{$a['deskripsi']}}</p>
                        <!-- Tombol, Tautan, atau elemen lainnya -->
                     </div>
+                  </label>
                  </div>
               </div>
                 @endforeach
@@ -138,6 +201,81 @@
     </div>
     <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
+    <script src="{{asset('jquery/jquery.min.js')}}"></script>
+    <script>
+      function okeModal(){
+        var csrfToken = "{{csrf_token()}}";
+        var fotoArray = document.querySelectorAll('input[name="foto[]"]:checked');
+        var arrAy = []
+        for(var i = 0; i < fotoArray.length; i++){
+          arrAy.push(fotoArray[i].value);
+        }
+        // console.log(arrAy);
+         $.ajax({
+           url: "{{route('deleteFoto.action', ['id_album' => $albumId])}}",
+           method: "POST",
+           data: {
+             _token: csrfToken,
+             _method: "DELETE",
+             arrFoto: arrAy
+           },
+           success: function(response){
+             console.log(response.message);
+             console.log(response.foto);
+           },
+           error: function(xhr){
+            console.log(xhr);
+           }
+         });
+      }
+      function modalDelete(){
+        var ckfoto = document.getElementsByClassName("ckfoto");
+        var ck = document.querySelectorAll('input[name="foto[]"]:checked');
+        if(ck.length < 1){
+          document.getElementById("modal-body").textContent = "Pilih setidak nya satu foto untuk dihapus";
+          document.getElementById("okeModal").classList.add("d-none");
+          document.getElementById("modalTriger").click();
+        }
+        else{
+          document.getElementById("modal-body").textContent = "Apakah anda yakin ingin menghapus "+ck.length+" foto";
+          document.getElementById("okeModal").classList.remove("d-none");
+          document.getElementById("modalTriger").click();
+        }
+      }
+      function backTrash(){
+        var ckfoto = document.getElementsByClassName("ckfoto");
+            document.getElementById("closeHapus").classList.add("d-none");
+            document.getElementById("okeHapus").classList.add("d-none");
+            document.getElementById("lblHapusFoto").classList.remove("d-none");
+            document.getElementById("hapusFoto").checked = true;
+            disableCkFoto();
+            for(var i = 0; i < ckfoto.length; i++){
+            ckfoto[i].checked = false;
+            console.log("cek nya false");
+            }
+      }
+      function disableCkFoto(){
+        var hapusFoto = document.getElementById("hapusFoto");
+      var ckfoto = document.getElementsByClassName("ckfoto");
+      if(hapusFoto.checked){
+        for(var i = 0; i < ckfoto.length; i++){
+            ckfoto[i].disabled = true;
+            console.log("cek nya true");
+        }
+            document.getElementById("closeHapus").classList.add("d-none");
+            document.getElementById("okeHapus").classList.add("d-none");
+          }
+          else{
+            for(var i = 0; i < ckfoto.length; i++){
+            ckfoto[i].disabled = false;
+            console.log("cek nya false");
+            }
+            document.getElementById("closeHapus").classList.remove("d-none");
+            document.getElementById("okeHapus").classList.remove("d-none");
+            document.getElementById("lblHapusFoto").classList.add("d-none");
+          }
+      }
+    </script>
 </body>
 </html>
 

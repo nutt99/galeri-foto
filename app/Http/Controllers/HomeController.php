@@ -19,7 +19,7 @@ class HomeController extends Controller
         else{   
             $album = Album::get()->where('userid', $req->session()->get('uid'));
             return view('home', [
-                'album' => $album,
+                'albumm' => $album,
             ]);
         }   
     }

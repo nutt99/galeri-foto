@@ -118,9 +118,9 @@
                 <label for="formFile" class="form-label">Default file input example</label>
                 <input class="form-control" type="file" id="formFile" name="foto" required>
               </div>              
-              <label for="AlbumName">Visibilitas</label>
+              <label for="AlbumName">Album</label>
               <select name="albumName" class="form-select">
-                @foreach ($album as $a)
+                @foreach ($albumm as $a)
                   <option value="{{ $a['nama_album'] }}!!!{{ $a['id'] }}">@php
                     echo explode("@", $a['nama_album'])[0];
                   @endphp 
@@ -212,7 +212,7 @@
               </div>
             </div>
             <div class="row column-gap-3">
-              @foreach ($album as $a)
+              @foreach ($albumm as $a)
           <div class="container card col-2 m-1 text-center m-2">
             <a class="text-decoration-none " href="album/{{ $a['id'] }}" style="color: black">
               <div class="card-img-top mt-4"><i class="fas fa-folder" style="font-size:60px"></i></div>
