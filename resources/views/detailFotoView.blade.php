@@ -210,6 +210,7 @@
         for(var i = 0; i < fotoArray.length; i++){
           arrAy.push(fotoArray[i].value);
         }
+        document.getElementById("modal-body").innerHTML = '<div class="spinner-border text-primary text-center" role="status"><span class="visually-hidden">Loading...</span></div>'
         // console.log(arrAy);
          $.ajax({
            url: "{{route('deleteFoto.action', ['id_album' => $albumId])}}",
@@ -222,6 +223,7 @@
            success: function(response){
              console.log(response.message);
              console.log(response.foto);
+             location.reload();
            },
            error: function(xhr){
             console.log(xhr);
