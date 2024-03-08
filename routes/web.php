@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\ProfilController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::post('/login', [LoginController::class, 'loginAction']);
 Route::get('/', [HomeController::class, 'berandaView']);
 Route::get('/detail/{id}', [DetailController::class, 'detailFotoView']);
 
+Route::get('/berandaJsonData', [HomeController::class, 'berandaJSON'])->name('getFotoDataJson');
+
 //like action
 Route::post('/detail/{id}/like', [DetailController::class, 'addLike'])->name('like.action');
 Route::delete('/detail/{id}/unlike', [DetailController::class, 'unLike'])->name('unlike.action');
@@ -42,6 +45,9 @@ Route::post('/registrasi', [LoginController::class, 'registerPengguna']);
 
 //home
 Route::get('/dashboard', [HomeController::class, 'homeView']);
+
+//profil
+Route::get('/profil', [ProfilController::class, 'profileView']);
 
 //detail album
 Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);

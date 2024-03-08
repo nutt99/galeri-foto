@@ -61,7 +61,7 @@
                                         <div class="col">
                                             <p id="likeCount">{{$foto->like_fotos->count()}}</p>
                                         </div>
-                                </div>
+                                    </div>
                             </label>
                         </div>
                         <div class="col">

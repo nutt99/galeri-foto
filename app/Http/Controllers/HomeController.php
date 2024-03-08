@@ -28,8 +28,14 @@ class HomeController extends Controller
             $query->where('visibilitas', '=', 'publik');
         });
         return view('beranda', [
-            'foto' => $rawFoto->orderBy(DB::raw('RAND()'))->get()
+            'foto' => $rawFoto->orderBy(DB::raw('RAND()'))->take(10)->get()
         ]);
+    }
+    public function berandaJSON(){
+        $rawFoto = Foto::with('albums')->whereHas('albums', function($query){
+            $query->where('visibilitas', '=', 'publik');
+        });
+       return response()->json($rawFoto->orderBy(DB::raw('RAND()'))->take(10)->get(), 200);
     }
     public function getIp(Request $req){
         return $req->ip();

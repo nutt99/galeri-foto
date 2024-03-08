@@ -54,9 +54,10 @@
           </div>
         </div>
       </div>  
-          <div class="ms-3 me-3 mt-3">
+          <div class="ms-3 me-3 mt-3" id="container-photo">
             <section class="flex" id="photos">
-              @foreach ($foto as $a)
+              {{-- <button onclick="getData()"></button> --}}
+              {{-- @foreach ($foto as $a)
                   <a class="text-decoration-none" href="detail/{{$a['id']}}">
                     <div class="overflow-y-hidden">
                       <img src="@php
@@ -65,11 +66,43 @@
                   <h6 class="text-truncate text-dark fw-bold ps-2">Ini deskripsi</h6>
                     </div>
                   </a>
-              @endforeach
+              @endforeach --}}
             </section>
           </div>
      
 <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('jquery/jquery.min.js')}}"></script>
+<script>
+  
+  document.addEventListener("DOMContentLoaded", function(){
+    getData();
+  });
+
+  function getData(){
+    $.ajax({
+    url: "{{route('getFotoDataJson')}}",
+    method: "GET",
+    beforeSend: function() {
+      var loadingComponent = "<center id='loading'><div class='spinner-border text-primary' role='status'><span class='visually-hidden'>Loading...</span></div><p>Please Wait...</p></center>";
+      $("#container-photo").append(loadingComponent);
+    },
+    data: {},
+    success: function(response){
+      $("#loading").remove();
+      var html = '';
+      response.forEach(function(item){
+        console.log(item.id);
+        console.log(item.judul_foto);
+        html += "<a class='text-decoration-none' href='detail/" + item.id + "'><div class='overflow-y-hidden'><img src='" + item.lokasi_file + "' class='img-fluid border' alt='...' style='border-radius: 25px'><h6 class='text-truncate text-dark fw-bold ps-2'>Ini deskripsi</h6></div></a>";
+      });
+      $("#photos").append(html);
+    },
+    error: function(xhr){
+      console.log(xhr);
+    }
+  });
+  }
+</script>
 <script>
   const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
