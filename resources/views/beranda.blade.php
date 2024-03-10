@@ -74,13 +74,20 @@
 <script src="{{asset('jquery/jquery.min.js')}}"></script>
 <script>
   
+  var page = 1;
+  var isLoading = false;
+  var hasMoreData = true;
+
   document.addEventListener("DOMContentLoaded", function(){
     getData();
   });
 
+
   function getData(){
-    $.ajax({
-    url: "{{route('getFotoDataJson')}}",
+    if (!isLoading && hasMoreData) {
+      isLoading = true;
+      $.ajax({
+    url: '/berandaJsonData?page=' + page,
     method: "GET",
     beforeSend: function() {
       var loadingComponent = "<center id='loading'><div class='spinner-border text-primary' role='status'><span class='visually-hidden'>Loading...</span></div><p>Please Wait...</p></center>";
@@ -89,19 +96,41 @@
     data: {},
     success: function(response){
       $("#loading").remove();
+      if(response.data != ''){
       var html = '';
-      response.forEach(function(item){
-        console.log(item.id);
-        console.log(item.judul_foto);
+
+      // bikin pengacakan number nya
+      const randomData = response.data.sort(() => Math.random() - 0.5);
+
+      randomData.forEach(function(item){
         html += "<a class='text-decoration-none' href='detail/" + item.id + "'><div class='overflow-y-hidden'><img src='" + item.lokasi_file + "' class='img-fluid border' alt='...' style='border-radius: 25px'><h6 class='text-truncate text-dark fw-bold ps-2'>Ini deskripsi</h6></div></a>";
       });
+      
       $("#photos").append(html);
+
+      isLoading = false;
+
+      page++;
+      } 
+      else {
+        hasMoreData = false;
+      }
     },
     error: function(xhr){
       console.log(xhr);
+      isLoading = false;
     }
   });
+
+    }
   }
+
+   $(window).scroll(function() {
+         if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+             getData();
+         }
+     });
+
 </script>
 <script>
   const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')

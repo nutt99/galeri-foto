@@ -100,9 +100,7 @@
               </div>              
               <label for="AlbumName">Album</label>
               <select name="albumName" class="form-select">
-                
                   <option value="{{ $namaAlbum }}">{{$namaAlbum}} ({{ $visible }})</option>
-                
               </select>
             </div>
             <div class="modal-footer">
@@ -146,7 +144,7 @@
           @endfor --}}
           <button id="modalTriger" class="d-none" data-bs-toggle="modal" data-bs-target="#deletePhoto"></button>
           <div class="row">
-            <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2">
+            <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2 sticky-top bg-body">
               <div class="d-flex justify-content-between align-items-center">
                 <h2>{{ $namaAlbum }}</h2>
                 <div class="row">
