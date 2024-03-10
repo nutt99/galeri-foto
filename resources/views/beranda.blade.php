@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css') }}"/>
     <link rel="stylesheet" href="{{asset('style/grid.css')}}" type="text/css">
     <title>Beranda</title>
     <style>
@@ -30,10 +30,10 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse justify-content-end navbar-collapse" id="navbarNavAltMarkup">
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link active" aria-current="page" href="#home">Home</a>
-              <li class="nav-item dropdown">
+              {{-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Feature
                 </a>
@@ -42,18 +42,22 @@
                   <li><a class="dropdown-item" href="#another">Another action</a></li>
                   <li><a class="dropdown-item" href="#else">Something else here</a></li>
                 </ul>
-              </li>
+              </li> --}}
               
+              @if (Session::get('uid') == null && Session::get('username') == null)
               <a class="nav-link me-3" href="/login">Login</a>
-            <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Search</button>
+              @elseif (Session::get('uid') != null && Session::get('username') != null)
+              <a class="nav-link me-3" href="/login">Dasbor</a>
+              @endif
             </div>
+            <input class="form-control me-2 bg-light mx-auto me-5" type="search" placeholder="Search" aria-label="Search" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
           </div>
         </div>
       </div>  
-          <div class="ms-3 me-3 mt-3">
+          <div class="ms-3 me-3 mt-3" id="container-photo">
             <section class="flex" id="photos">
-              @foreach ($foto as $a)
+              {{-- <button onclick="getData()"></button> --}}
+              {{-- @foreach ($foto as $a)
                   <a class="text-decoration-none" href="detail/{{$a['id']}}">
                     <div class="overflow-y-hidden">
                       <img src="@php
@@ -62,10 +66,75 @@
                   <h6 class="text-truncate text-dark fw-bold ps-2">Ini deskripsi</h6>
                     </div>
                   </a>
-              @endforeach
+              @endforeach --}}
             </section>
           </div>
      
 <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('jquery/jquery.min.js')}}"></script>
+<script>
+  
+  var page = 1;
+  var isLoading = false;
+  var hasMoreData = true;
+
+  document.addEventListener("DOMContentLoaded", function(){
+    getData();
+  });
+
+
+  function getData(){
+    if (!isLoading && hasMoreData) {
+      isLoading = true;
+      $.ajax({
+    url: '/berandaJsonData?page=' + page,
+    method: "GET",
+    beforeSend: function() {
+      var loadingComponent = "<center id='loading'><div class='spinner-border text-primary' role='status'><span class='visually-hidden'>Loading...</span></div><p>Please Wait...</p></center>";
+      $("#container-photo").append(loadingComponent);
+    },
+    data: {},
+    success: function(response){
+      $("#loading").remove();
+      if(response.data != ''){
+      var html = '';
+
+      // bikin pengacakan number nya
+      const randomData = response.data.sort(() => Math.random() - 0.5);
+
+      randomData.forEach(function(item){
+        html += "<a class='text-decoration-none' href='detail/" + item.id + "'><div class='overflow-y-hidden'><img src='" + item.lokasi_file + "' class='img-fluid border' alt='...' style='border-radius: 25px'><h6 class='text-truncate text-dark fw-bold ps-2'>Ini deskripsi</h6></div></a>";
+      });
+      
+      $("#photos").append(html);
+
+      isLoading = false;
+
+      page++;
+      } 
+      else {
+        hasMoreData = false;
+      }
+    },
+    error: function(xhr){
+      console.log(xhr);
+      isLoading = false;
+    }
+  });
+
+    }
+  }
+
+   $(window).scroll(function() {
+         if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+             getData();
+         }
+     });
+
+</script>
+<script>
+  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+</script>
 </body>
 </html>
