@@ -36,6 +36,9 @@ Route::delete('/detail/{id}/unlike', [DetailController::class, 'unLike'])->name(
 //add komentar
 Route::post('/detail/{id}/komentar', [DetailController::class, 'addKomentar'])->name('addKomen.action');
 
+//update deskripsi foto
+Route::put('/updateFoto', [DetailController::class, 'editDeskripsi'])->name('editDeskripsi');
+
 //logout
 Route::get('/logout', [LoginController::class, 'logout']);
 

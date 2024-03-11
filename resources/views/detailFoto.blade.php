@@ -20,6 +20,7 @@
           'GRAD' 0,
           'opsz' 24
         }
+
         .pointer-set:hover{
             cursor: pointer
         }

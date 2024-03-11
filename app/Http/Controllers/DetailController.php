@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\DB;
 
 class DetailController extends Controller
 {
+    
+    public function editDeskripsi(Request $req){
+        $idFoto = $req->input('idFoto');
+        $foto = Foto::firstWhere('id', $idFoto);
+        $foto->deskripsi = $req->input('deskripsi');
+        $foto->save();
+        return response()->json([
+            'idFoto' => $idFoto,
+            'deskripsi' => $req->input('deskripsi')
+        ], 200);
+    }
+
     public function detailFotoView(Request $req, $id){
         $foto = Foto::with(['komentars', 'like_fotos'])->firstWhere('id', $id);
         $ceklike = false;

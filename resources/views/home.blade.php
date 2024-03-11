@@ -115,9 +115,13 @@
             </div>
             <div class="modal-body container">
               <div class="mb-3">
-                <label for="formFile" class="form-label">Default file input example</label>
+                <label for="formFile" class="form-label">Tambahkan Foto</label>
                 <input class="form-control" type="file" id="formFile" name="foto" required>
-              </div>              
+              </div>  
+              <div class="mb-3">
+                <label for="formDeskripsi" class="form-label">Deskripsi Foto</label>
+                <textarea class="form-control" id="formDeskripsi" name="deskripsi" rows="3" required></textarea>  
+              </div>            
               <label for="AlbumName">Album</label>
               <select name="albumName" class="form-select">
                 @foreach ($albumm as $a)

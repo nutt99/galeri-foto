@@ -95,9 +95,13 @@
             <div class="modal-body container">
               <div class="mb-3">
                 <input type="hidden" name="albumId" value="{{$albumId}}">
-                <label for="formFile" class="form-label">Default file input example</label>
+                <label for="formFile" class="form-label">Tambahkan Foto</label>
                 <input class="form-control" type="file" id="formFile" name="foto" required>
-              </div>              
+              </div>  
+              <div class="mb-3">
+                <label for="formDeskripsi" class="form-label">Deskripsi Foto</label>
+                <textarea class="form-control" id="formDeskripsi" name="deskripsi" rows="3" required></textarea>  
+              </div>            
               <label for="AlbumName">Album</label>
               <select name="albumName" class="form-select">
                   <option value="{{ $namaAlbum }}">{{$namaAlbum}} ({{ $visible }})</option>
@@ -135,6 +139,25 @@
         </div>
       </div>
       {{-- end modal 3 --}}
+      {{-- Warn Modal --}}
+      <div class="modal fade" id="warn-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Hapus Foto</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body container">
+                <p>Anda sedang dalam mode edit, periksa kembali foto yang sedang anda edit. Tekan Ya akan merefresh page dan semua perubahan yang belum anda simpan akan hilang. Apakah anda yakin?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+              <button type="button" class="btn text-light bg-danger" onclick="refreshPage()">Ya</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- End Warn Modal --}}
       <div style="width:80%">
         <div class="row m-2 mt-3 ms-3">
           {{-- @for ($i = 1; $i < 240; $i++)
@@ -143,6 +166,7 @@
           </div>
           @endfor --}}
           <button id="modalTriger" class="d-none" data-bs-toggle="modal" data-bs-target="#deletePhoto"></button>
+          <button id="warn-verif" class="d-none" data-bs-toggle="modal" data-bs-target="#warn-modal"></button>
           <div class="row">
             <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2 sticky-top bg-body">
               <div class="d-flex justify-content-between align-items-center">
@@ -150,7 +174,7 @@
                 <div class="row">
                   <i class="fas fa-times close-icon col d-none" id="closeHapus" onclick="backTrash()" style="cursor: pointer"></i>
                 <label for="hapusFoto" class="col" id="lblHapusFoto">
-                  <i class="fas fa-trash text-danger" style="cursor: pointer"></i>
+                  <i class="fas fa-trash text-danger" style="cursor: pointer" onclick="verifEditBeforeDelete()"></i>
                   <input class="d-none" type="checkbox" id="hapusFoto" onchange="disableCkFoto()" checked>
                 </label>
                 <i class="fas fa-solid fa-check col d-none" id="okeHapus" style="cursor: pointer" onclick="modalDelete()"></i>
@@ -180,10 +204,12 @@
                     <img src="@php
                     echo asset($a['lokasi_file']);
                   @endphp" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <input class="ckfoto" value="{{$a['id']}}" type="checkbox" name="foto[]" id="ckfoto" disabled>
-                       <h5 class="card-title">Ini judul ceritanya</h5>
-                       <p class="card-text text-truncate">{{$a['deskripsi']}}</p>
+                    <div class="card-body" id="photoSet{{$a['id']}}">
+                      <input class="ckfoto d-none" value="{{$a['id']}}" type="checkbox" name="foto[]" id="ckfoto" disabled>
+                       <i class="fas fa-solid fa-edit editId" id="editId{{$a['id']}}" onclick="setEditField('{{$a['id']}}')"></i>
+                       <i class="fas fa-times close-icon d-none" id="cancelEdit{{$a['id']}}" onclick="cancelEdit('{{$a['id']}}')"></i>
+                       <i class="fas fa-solid fa-check d-none" id="okEdit{{$a['id']}}" onclick="okEdit('{{$a['id']}}')"></i>
+                       <h5 class="card-text text-truncate" id="desk{{$a['id']}}">{{$a['deskripsi']}}</h5>
                        <!-- Tombol, Tautan, atau elemen lainnya -->
                     </div>
                   </label>
@@ -201,6 +227,65 @@
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     <script src="{{asset('jquery/jquery.min.js')}}"></script>
     <script>
+
+      var editMode = false;
+      var visibleCkb = false;
+
+      function refreshPage(){
+        location.reload();
+      }
+
+      function cancelEdit(id){
+        var html = '<h5 class="card-text text-truncate" id="desk' + id + '">' + document.getElementById("teksEdit" + id).value + '</h5>';
+        document.getElementById("teksEdit" + id).remove();
+        $("#photoSet" + id).append(html);
+        document.getElementById("editId" + id).classList.remove("d-none");
+        document.getElementById("cancelEdit" + id).classList.add("d-none");
+        document.getElementById("okEdit" + id).classList.add("d-none");
+        editMode = false;
+        document.getElementById("hapusFoto").disabled = false;
+      }
+
+      function okEdit(id){
+        $.ajax({
+          url: "{{route('editDeskripsi')}}",
+          method: "POST",
+          data: {
+            _token: "{{csrf_token()}}",
+            _method: "PUT",
+            deskripsi: document.getElementById("teksEdit" + id).value,
+            idFoto: id
+          },
+          success: function(response){
+            console.log(response.idFoto);
+            console.log(response.deskripsi);
+            var html = '<h5 class="card-text text-truncate" id="desk' + id + '">' + document.getElementById("teksEdit" + id).value + '</h5>';
+            document.getElementById("teksEdit" + id).remove();
+            $("#photoSet" + id).append(html);
+            document.getElementById("editId" + id).classList.remove("d-none");
+            document.getElementById("cancelEdit" + id).classList.add("d-none");
+            document.getElementById("okEdit" + id).classList.add("d-none");
+            editMode = false;
+            document.getElementById("hapusFoto").disabled = false;
+          },
+          error: function(xhr){
+            console.log(xhr);
+          }
+        });
+      }
+
+      function setEditField(id){
+        var deskripsi = document.getElementById("desk" + id).textContent;
+        var textArea = '<textarea class="form-control" id="teksEdit' + id + '" name="deskripsiEdit" rows="3">' + deskripsi + '</textarea>';
+        $("#photoSet" + id).append(textArea);
+        document.getElementById("editId" + id).classList.add("d-none");
+        document.getElementById("cancelEdit" + id).classList.remove("d-none");
+        document.getElementById("okEdit" + id).classList.remove("d-none");
+        document.getElementById("desk" + id).remove();
+        editMode = true;
+        document.getElementById("hapusFoto").disabled = true;
+      }
+
       function okeModal(){
         var csrfToken = "{{csrf_token()}}";
         var fotoArray = document.querySelectorAll('input[name="foto[]"]:checked');
@@ -228,6 +313,7 @@
            }
          });
       }
+
       function modalDelete(){
         var ckfoto = document.getElementsByClassName("ckfoto");
         var ck = document.querySelectorAll('input[name="foto[]"]:checked');
@@ -248,12 +334,29 @@
             document.getElementById("okeHapus").classList.add("d-none");
             document.getElementById("lblHapusFoto").classList.remove("d-none");
             document.getElementById("hapusFoto").checked = true;
+            $(".ckfoto").addClass("d-none");
+            visibleCkb = false;
             disableCkFoto();
             for(var i = 0; i < ckfoto.length; i++){
             ckfoto[i].checked = false;
             console.log("cek nya false");
             }
       }
+
+      function verifEditBeforeDelete(){
+        if(editMode == true){
+          document.getElementById("warn-verif").click();
+          return;
+        }
+        visibleCkb = !visibleCkb;
+        if(visibleCkb == true){
+          $(".ckfoto").removeClass("d-none");
+        }
+        else{
+          $(".ckfoto").addClass("d-none");
+        }
+      }
+
       function disableCkFoto(){
         var hapusFoto = document.getElementById("hapusFoto");
       var ckfoto = document.getElementsByClassName("ckfoto");
@@ -263,6 +366,7 @@
             console.log("cek nya true");
         }
             document.getElementById("closeHapus").classList.add("d-none");
+            $(".editId").removeClass("d-none");
             document.getElementById("okeHapus").classList.add("d-none");
           }
           else{
@@ -272,6 +376,7 @@
             }
             document.getElementById("closeHapus").classList.remove("d-none");
             document.getElementById("okeHapus").classList.remove("d-none");
+            $(".editId").addClass("d-none");
             document.getElementById("lblHapusFoto").classList.add("d-none");
           }
       }
