@@ -36,7 +36,7 @@ class HomeController extends Controller
             $query->where('visibilitas', '=', 'publik');
         });
     //    return response()->json($rawFoto->orderBy(DB::raw('RAND()'))->take(20)->get(), 200);
-       return response()->json($rawFoto->latest()->paginate(15), 200);
+       return response()->json($rawFoto->latest()->paginate(16), 200);
     }
     public function getIp(Request $req){
         return $req->ip();

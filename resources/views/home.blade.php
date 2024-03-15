@@ -12,6 +12,14 @@
       .k :hover{
         background-color: rgb(156, 156, 156);
       }
+      .width-dinamis{
+        width: 80%;
+      }
+      @media(max-width: 768px){
+        .width-dinamis{
+          width: 100%;
+        }
+      }
     </style>
 </head>
 <body>
@@ -30,8 +38,8 @@
       </button>
       <div class="collapse justify-content-end navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-md-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Feature
             </a>
             <ul class="dropdown-menu">
@@ -39,9 +47,10 @@
               <li><a class="dropdown-item" href="#another">Another action</a></li>
               <li><a class="dropdown-item" href="#else">Something else here</a></li>
             </ul>
-          </li>
+          </li> --}}
           
-          <a class="nav-link me-3" href="#pricing">Pricing</a>
+          <a class="nav-link me-3 d-md-none" href="/">Beranda</a>
+          <a class="nav-link me-3 d-md-none" href="/profil">Profile</a>
         <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">Search</button>
         </div>
@@ -49,7 +58,7 @@
     </div>
   </div>  
     <div class="row row-cols-2">
-      <div class="col sticky-top" style="height:100vh;width:20%;background-color:black;">
+      <div class="col sticky-top d-none d-md-block" style="height:100vh;width:20%;background-color:black;">
         <div class="pt-5 ms-2">
             <a class="text-decoration-none k" href="/">
               <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
@@ -202,7 +211,7 @@
         </div>
       </div>
       {{-- end modal 4 --}}
-      <div style="width:80%">
+      <div class="width-dinamis">
         <div class="row m-2 mt-3 ms-3">
           
           <div class="row">
@@ -217,7 +226,7 @@
             </div>
             <div class="row column-gap-3">
               @foreach ($albumm as $a)
-          <div class="container card col-2 m-1 text-center m-2">
+          <div class="container card col-md-2 m-1 text-center m-2">
             <a class="text-decoration-none " href="album/{{ $a['id'] }}" style="color: black">
               <div class="card-img-top mt-4"><i class="fas fa-folder" style="font-size:60px"></i></div>
             <div class="card-body container text-truncate"><div style="font-weight: bold">({{ $a['visibilitas'] }})</div> @php

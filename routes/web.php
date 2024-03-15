@@ -66,5 +66,8 @@ Route::post('/upDetail', [AlbumController::class, 'upFotoDetail'])->name('detail
 Route::put('/editAlbum', [AlbumController::class, 'editAlbum'])->name('editAlbum');
 Route::delete('/deleteAlbum', [AlbumController::class, 'deleteAlbum'])->name('deleteAlbum');
 
+Route::get('/download/{id}', [DetailController::class, 'downloadFile']);
+
+
 
 // Route::get('/ip',[HomeController::class, 'cekIp']);

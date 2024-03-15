@@ -64,4 +64,8 @@ class DetailController extends Controller
                 'message' => "sukses"
             ], 200);
     }
+    public function downloadFile(Request $req, $id){
+        $lokasi_file = Foto::firstWhere('id', $id);
+        return response()->download($lokasi_file['lokasi_file']);
+    }
 }

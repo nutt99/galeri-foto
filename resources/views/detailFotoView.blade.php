@@ -20,6 +20,14 @@
             height: auto;
             overflow: hidden;
         }
+        .width-dinamis{
+        width: 80%;
+      }
+      @media(max-width: 768px){
+        .width-dinamis{
+          width: 100%;
+        }
+      }
     </style>
 </head>
 <body>
@@ -38,8 +46,8 @@
       </button>
       <div class="collapse justify-content-end navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-md-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Feature
             </a>
             <ul class="dropdown-menu">
@@ -47,9 +55,10 @@
               <li><a class="dropdown-item" href="#another">Another action</a></li>
               <li><a class="dropdown-item" href="#else">Something else here</a></li>
             </ul>
-          </li>
-          
-          <a class="nav-link me-3" href="#pricing">Pricing</a>
+          </li> --}}
+          <a class="nav-link me-3 d-md-none" href="/dashboard">Album</a>
+          <a class="nav-link me-3 d-md-none" href="/">Beranda</a>
+          <a class="nav-link me-3 d-md-none" href="/profil">Profile</a>
         <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">Search</button>
         </div>
@@ -57,7 +66,7 @@
     </div>
   </div>  
     <div class="row row-cols-2">
-      <div class="col sticky-top" style="height:100vh;width:20%;background-color:black;">
+      <div class="col sticky-top d-none d-md-block" style="height:100vh;width:20%;background-color:black;">
         <div class="pt-5 ms-2">
             <a class="text-decoration-none k" href="/">
               <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
@@ -158,7 +167,7 @@
         </div>
       </div>
       {{-- End Warn Modal --}}
-      <div style="width:80%">
+      <div class="width-dinamis">
         <div class="row m-2 mt-3 ms-3">
           {{-- @for ($i = 1; $i < 240; $i++)
           <div class="container card col-2 m-1">
@@ -169,7 +178,7 @@
           <button id="warn-verif" class="d-none" data-bs-toggle="modal" data-bs-target="#warn-modal"></button>
           <div class="row">
             <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2 sticky-top bg-body">
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-around justify-content-md-between align-items-center">
                 <h2>{{ $namaAlbum }}</h2>
                 <div class="row">
                   <i class="fas fa-times close-icon col d-none" id="closeHapus" onclick="backTrash()" style="cursor: pointer"></i>
@@ -179,9 +188,6 @@
                 </label>
                 <i class="fas fa-solid fa-check col d-none" id="okeHapus" style="cursor: pointer" onclick="modalDelete()"></i>
                 </div>
-                <button type="button" class="rounded-pill text-light border-0 text-center p-1 fs-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background-color: black">
-                  Tambah +
-                </button>
               </div>
             </div>
             <div class="row column-gap-3">
@@ -206,10 +212,10 @@
                   @endphp" class="card-img-top" alt="...">
                     <div class="card-body" id="photoSet{{$a['id']}}">
                       <input class="ckfoto d-none" value="{{$a['id']}}" type="checkbox" name="foto[]" id="ckfoto" disabled>
-                       <i class="fas fa-solid fa-edit editId" id="editId{{$a['id']}}" onclick="setEditField('{{$a['id']}}')"></i>
-                       <i class="fas fa-times close-icon d-none" id="cancelEdit{{$a['id']}}" onclick="cancelEdit('{{$a['id']}}')"></i>
-                       <i class="fas fa-solid fa-check d-none" id="okEdit{{$a['id']}}" onclick="okEdit('{{$a['id']}}')"></i>
-                       <h5 class="card-text text-truncate" id="desk{{$a['id']}}">{{$a['deskripsi']}}</h5>
+                       <i class="fas fa-solid fa-edit editId" style="cursor: pointer" id="editId{{$a['id']}}" onclick="setEditField('{{$a['id']}}')"></i>
+                       <i class="fas fa-times close-icon d-none" style="cursor: pointer" id="cancelEdit{{$a['id']}}" onclick="cancelEdit('{{$a['id']}}')"></i>
+                       <i class="fas fa-solid fa-check d-none" style="cursor: pointer" id="okEdit{{$a['id']}}" onclick="okEdit('{{$a['id']}}')"></i>
+                       <h5 class="card-text text-truncate" id="desk{{$a['id']}}" ondblclick="setEditField('{{$a['id']}}')">{{$a['deskripsi']}}</h5>
                        <!-- Tombol, Tautan, atau elemen lainnya -->
                     </div>
                   </label>

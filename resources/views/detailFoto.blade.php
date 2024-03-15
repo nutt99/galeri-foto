@@ -33,10 +33,10 @@
     <div class="container p-3">
         <div class="card p-5">
             <div class="row">
-                <div class="container col"><img src="@php
+                <div class="container col-md"><img src="@php
                     echo asset($foto['lokasi_file']);
                 @endphp" alt="" class="img-fluid" style="border-radius: 25px"></div>
-                <div class="container col">
+                <div class="container col-md">
                     <p class="fw-bold fs-4">ini deskripsi</p>
                     <p class="fs-5">Posted By</p>
                     <p class="fs-6">{{$foto->pengguna->username}}</p>
@@ -68,13 +68,13 @@
                         <div class="col">
                             <h6 style="opacity: 0">asd</h6>
                             <label class="form-check-label">
-                                <a class="text-decoration-none text-dark" href="#komentar">
+                                <a class="text-decoration-none text-dark" href="/download/{{$foto->id}}">
                                     <div class="row g-1">
                                         <div class="col">
-                                            <i class="material-icons material-symbols-outlined">comment</i>
+                                            <i class="fas fa-download"></i>
                                         </div>
                                         <div class="col">
-                                            <p>Komentar</p>
+                                            <p>Download</p>
                                         </div>
                                     </div>
                                 </a>

@@ -51,22 +51,34 @@
               @endif
             </div>
             <input class="form-control me-2 bg-light mx-auto me-5" type="search" placeholder="Search" aria-label="Search" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
+            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Launch demo modal
+            </button> --}}
           </div>
         </div>
       </div>  
-          <div class="ms-3 me-3 mt-3" id="container-photo">
-            <section class="flex" id="photos">
-              {{-- <button onclick="getData()"></button> --}}
-              {{-- @foreach ($foto as $a)
-                  <a class="text-decoration-none" href="detail/{{$a['id']}}">
-                    <div class="overflow-y-hidden">
-                      <img src="@php
-                    echo asset($a['lokasi_file']);
-                  @endphp" class="img-fluid border" alt="..." style="border-radius: 25px">
-                  <h6 class="text-truncate text-dark fw-bold ps-2">Ini deskripsi</h6>
-                    </div>
-                  </a>
-              @endforeach --}}
+      {{-- modal --}}
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- end modal --}}
+          <div class="ms-3 me-3 mt-3 mb-5" id="container-photo">
+            <section id="photos">
+              
             </section>
           </div>
      
@@ -103,7 +115,7 @@
       const randomData = response.data.sort(() => Math.random() - 0.5);
 
       randomData.forEach(function(item){
-        html += "<a class='text-decoration-none' href='detail/" + item.id + "'><div class='overflow-y-hidden'><img src='" + item.lokasi_file + "' class='img-fluid border' alt='...' style='border-radius: 25px'><h6 class='text-truncate text-dark fw-bold ps-2'>Ini deskripsi</h6></div></a>";
+        html += "<a class='text-decoration-none' href='detail/" + item.id + "'><div class='overflow-y-hidden'><img src='" + item.lokasi_file + "' class='img-fluid border' alt='...' style='border-radius: 25px'><h6 class='text-truncate text-dark fw-bold ps-2'>" + item.deskripsi + "</h6></div></a>";
       });
       
       $("#photos").append(html);
