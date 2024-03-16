@@ -7,7 +7,7 @@
     <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css') }}"/>
     <link rel="stylesheet" href="{{asset('style/grid.css')}}" type="text/css">
-    <title>Beranda</title>
+    <title>{{$searchTitle}}</title>
     <style>
         /* .grid-item {
             margin-bottom: 15px;
@@ -104,22 +104,22 @@
     if (!isLoading && hasMoreData) {
       isLoading = true;
       $.ajax({
-    url: '/berandaJsonData?page=' + page,
+    url: '/searchData?page=' + page,
     method: "GET",
     beforeSend: function() {
       var loadingComponent = "<center id='loading'><div class='spinner-border text-primary' role='status'><span class='visually-hidden'>Loading...</span></div><p>Please Wait...</p></center>";
       $("#container-photo").append(loadingComponent);
     },
-    data: {},
+    data: {
+        'searchTitle': '{{$searchTitle}}'
+    },
     success: function(response){
       $("#loading").remove();
       if(response.data != ''){
       var html = '';
 
-      // bikin pengacakan number nya
-      const randomData = response.data.sort(() => Math.random() - 0.5);
 
-      randomData.forEach(function(item){
+      response.data.forEach(function(item){
         html += "<a class='text-decoration-none' href='detail/" + item.id + "'><div class='overflow-y-hidden'><img src='" + item.lokasi_file + "' class='img-fluid border' alt='...' style='border-radius: 25px'><h6 class='text-truncate text-dark fw-bold ps-2'>" + item.deskripsi + "</h6></div></a>";
       });
       

@@ -68,6 +68,11 @@ Route::delete('/deleteAlbum', [AlbumController::class, 'deleteAlbum'])->name('de
 
 Route::get('/download/{id}', [DetailController::class, 'downloadFile']);
 
+Route::get('/search', [HomeController::class, 'searchJSON'])->name('searchJSON');
+
+Route::post('/search', [HomeController::class, 'searchView']);
+Route::get('/searchData', [HomeController::class, 'searchDataJSON']);
+
 
 
 // Route::get('/ip',[HomeController::class, 'cekIp']);
