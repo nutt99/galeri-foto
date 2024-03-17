@@ -70,7 +70,7 @@
             Album
           </div>
         </a>
-        <a href="/profil" class="text-decoration-none k">
+        <a href="/profil/{{Session::get('uid')}}" class="text-decoration-none k">
           <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
             Profil
           </div>

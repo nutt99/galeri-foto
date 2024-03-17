@@ -51,6 +51,7 @@ Route::get('/dashboard', [HomeController::class, 'homeView']);
 
 //profil
 Route::get('/profil/{id}', [ProfilController::class, 'profileView']);
+Route::put('/editUser', [ProfilController::class, 'editUser'])->name('editUser');
 
 //detail album
 Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
@@ -72,6 +73,12 @@ Route::get('/search', [HomeController::class, 'searchJSON'])->name('searchJSON')
 
 Route::post('/search', [HomeController::class, 'searchView']);
 Route::get('/searchData', [HomeController::class, 'searchDataJSON']);
+
+//follow route
+
+Route::post('/addFollow', [ProfilController::class, 'addFollow'])->name('addFollow');
+Route::delete('/removeFollow', [ProfilController::class, 'removeFollow'])->name('removeFollow');
+
 
 
 
