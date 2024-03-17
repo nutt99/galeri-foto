@@ -51,8 +51,8 @@
           
           <a class="nav-link me-3 d-md-none" href="/">Beranda</a>
           <a class="nav-link me-3 d-md-none" href="/profil">Profile</a>
-        <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
+        {{-- <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button> --}}
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@
         </a>
         <a href="/logout" class="text-decoration-none k">
           <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
-            Logout
+            Keluar
           </div>
         </a>
         </div>

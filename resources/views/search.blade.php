@@ -32,7 +32,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#home">Home</a>
+              <a class="nav-link active" aria-current="page" href="/">Beranda</a>
               {{-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Feature
@@ -45,16 +45,16 @@
               </li> --}}
               
               @if (Session::get('uid') == null && Session::get('username') == null)
-              <a class="nav-link me-3" href="/login">Login</a>
+              <a class="nav-link me-3" href="/login">Masuk</a>
               @elseif (Session::get('uid') != null && Session::get('username') != null)
               <a class="nav-link me-3" href="/login">Dasbor</a>
               @endif
             </div>
             {{-- <input class="form-control me-2 bg-light mx-auto me-5" type="search" placeholder="Search" aria-label="Search" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover"> --}}
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              Search
-            </button>
           </div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fas fa-search"></i>
+          </button>
         </div>
       </div>  
       {{-- modal --}}

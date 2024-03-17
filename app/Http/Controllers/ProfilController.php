@@ -14,9 +14,12 @@ class ProfilController extends Controller
         return $fl->sessionCheck($req);
     }
     
-    public function profileView(Request $req){
+    public function profileView(Request $req, $id){
         if($this->setChecker($req) == true){
-            return "ini page profile";
+            $user = Pengguna::with('albums')->firstWhere('id', $id);
+            return view('profile', [
+                'user' => $user
+            ]);
         }
         else{
             return redirect()->intended('/login');

@@ -59,8 +59,9 @@
           <a class="nav-link me-3 d-md-none" href="/dashboard">Album</a>
           <a class="nav-link me-3 d-md-none" href="/">Beranda</a>
           <a class="nav-link me-3 d-md-none" href="/profil">Profile</a>
-        <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
+          <a class="nav-link me-3 d-md-none" href="/logout">Keluar</a>
+        {{-- <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button> --}}
         </div>
       </div>
     </div>
@@ -85,7 +86,7 @@
         </a>
         <a href="/logout" class="text-decoration-none k">
           <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
-            Logout
+            Keluar
           </div>
         </a>
         </div>
@@ -215,6 +216,7 @@
                        <i class="fas fa-solid fa-edit editId" style="cursor: pointer" id="editId{{$a['id']}}" onclick="setEditField('{{$a['id']}}')"></i>
                        <i class="fas fa-times close-icon d-none" style="cursor: pointer" id="cancelEdit{{$a['id']}}" onclick="cancelEdit('{{$a['id']}}')"></i>
                        <i class="fas fa-solid fa-check d-none" style="cursor: pointer" id="okEdit{{$a['id']}}" onclick="okEdit('{{$a['id']}}')"></i>
+                       <a class="text-decoration-none text-primary ms-1" href="/detail/{{$a['id']}}"><i class="fas fa-solid fa-eye"></i></a>
                        <h5 class="card-text text-truncate" id="desk{{$a['id']}}" ondblclick="setEditField('{{$a['id']}}')">{{$a['deskripsi']}}</h5>
                        <!-- Tombol, Tautan, atau elemen lainnya -->
                     </div>

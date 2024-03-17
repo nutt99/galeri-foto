@@ -15,4 +15,7 @@ class Album extends Model
     public function fotos(){
         return $this->morphMany(Foto::class, 'fotoable', 'fotoType', 'albumId');
     }
+    public function pengguna(){
+        return $this->belongsTo(Pengguna::class, 'userid');
+    }
 }

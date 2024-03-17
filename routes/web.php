@@ -50,7 +50,7 @@ Route::post('/registrasi', [LoginController::class, 'registerPengguna']);
 Route::get('/dashboard', [HomeController::class, 'homeView']);
 
 //profil
-Route::get('/profil', [ProfilController::class, 'profileView']);
+Route::get('/profil/{id}', [ProfilController::class, 'profileView']);
 
 //detail album
 Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);

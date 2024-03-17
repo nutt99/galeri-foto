@@ -37,8 +37,8 @@
                     echo asset($foto['lokasi_file']);
                 @endphp" alt="" class="img-fluid" style="border-radius: 25px"></div>
                 <div class="container col-md">
-                    <p class="fw-bold fs-4">ini deskripsi</p>
-                    <p class="fs-5">Posted By</p>
+                    <p class="fw-bold fs-4">{{$foto->deskripsi}}</p>
+                    <p class="fs-5">Diposting oleh</p>
                     <p class="fs-6">{{$foto->pengguna->username}}</p>
                     @if (Session::get('uid') != null && Session::get('username') != null)
                         <div class="row g-2">
@@ -74,7 +74,7 @@
                                             <i class="fas fa-download"></i>
                                         </div>
                                         <div class="col">
-                                            <p>Download</p>
+                                            <p>Unduh</p>
                                         </div>
                                     </div>
                                 </a>
