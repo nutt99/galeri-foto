@@ -18,4 +18,10 @@ class Pengguna extends Model
     public function komentars(){
         return $this->hasMany(Komentar::class, 'userId', 'id');
     }
+    public function albums(){
+        return $this->hasMany(Album::class, 'userid', 'id');
+    }
+    public function follows(){
+        return $this->hasMany(Follow::class, 'targetId', 'id');
+    }
 }

@@ -36,6 +36,9 @@ Route::delete('/detail/{id}/unlike', [DetailController::class, 'unLike'])->name(
 //add komentar
 Route::post('/detail/{id}/komentar', [DetailController::class, 'addKomentar'])->name('addKomen.action');
 
+//update deskripsi foto
+Route::put('/updateFoto', [DetailController::class, 'editDeskripsi'])->name('editDeskripsi');
+
 //logout
 Route::get('/logout', [LoginController::class, 'logout']);
 
@@ -47,7 +50,8 @@ Route::post('/registrasi', [LoginController::class, 'registerPengguna']);
 Route::get('/dashboard', [HomeController::class, 'homeView']);
 
 //profil
-Route::get('/profil', [ProfilController::class, 'profileView']);
+Route::get('/profil/{id}', [ProfilController::class, 'profileView']);
+Route::put('/editUser', [ProfilController::class, 'editUser'])->name('editUser');
 
 //detail album
 Route::get('/album/{id_album}', [AlbumController::class, 'detailView']);
@@ -62,6 +66,21 @@ Route::post('/upDetail', [AlbumController::class, 'upFotoDetail'])->name('detail
 // Route::get('/getAlbumInfo', [AlbumController::class, 'getAlbumInfo'])->name('albuminfo');
 Route::put('/editAlbum', [AlbumController::class, 'editAlbum'])->name('editAlbum');
 Route::delete('/deleteAlbum', [AlbumController::class, 'deleteAlbum'])->name('deleteAlbum');
+
+Route::get('/download/{id}', [DetailController::class, 'downloadFile']);
+
+Route::get('/search', [HomeController::class, 'searchJSON'])->name('searchJSON');
+
+Route::post('/search', [HomeController::class, 'searchView']);
+Route::get('/searchData', [HomeController::class, 'searchDataJSON']);
+
+//follow route
+
+Route::post('/addFollow', [ProfilController::class, 'addFollow'])->name('addFollow');
+Route::delete('/removeFollow', [ProfilController::class, 'removeFollow'])->name('removeFollow');
+Route::get('/getDataFollower', [ProfilController::class, 'getDataFollower'])->name('getDataFollower');
+
+
 
 
 // Route::get('/ip',[HomeController::class, 'cekIp']);

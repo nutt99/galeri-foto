@@ -15,11 +15,14 @@ class AlbumController extends Controller
         $detailFoto = Foto::get()->where('albumId', $id_album);
         $album = Album::firstWhere('id', $id_album);
         $namaAlbum = explode("@", $album['nama_album'])[0];
+        $username = explode("@", $album['nama_album'])[1];
         return view('detailFotoView', [
+            'username' => $username,
             'namaAlbum' => $namaAlbum,
             'albumId' => $id_album,
             'visible' => $album->visibilitas,
-            'detailFoto' => $detailFoto
+            'detailFoto' => $detailFoto,
+            'user_album_id' => $album->userid
         ]);
     }
 
@@ -58,6 +61,7 @@ class AlbumController extends Controller
                 $file->move("album_user/".explode("!!!",$req->albumName)[0], $file->getClientOriginalName());
                 Foto::create([
                     'judul_foto' => $req->file("foto")->getClientOriginalName(),
+                    'deskripsi' => $req->deskripsi,
                     'lokasi_file' => "album_user/".explode("!!!", $req->albumName)[0]."/".$req->file("foto")->getClientOriginalName(),
                     'albumId' => explode("!!!", $req->albumName)[1],
                     'userId' => $req->session()->get('uid')
@@ -82,6 +86,7 @@ class AlbumController extends Controller
                 $file->move("album_user/".$req->albumName."@".$req->session()->get('username'), $file->getClientOriginalName());
                 Foto::create([
                     'judul_foto' => $req->file("foto")->getClientOriginalName(),
+                    'deskripsi' => $req->deskripsi,
                     'lokasi_file' => "album_user/".$req->albumName."@".$req->session()->get('username')."/".$req->file("foto")->getClientOriginalName(),
                     'albumId' => $req->albumId,
                     'userId' => $req->session()->get('uid')

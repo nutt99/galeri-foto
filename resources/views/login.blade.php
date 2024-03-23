@@ -14,8 +14,8 @@
           </button>
           <div class="collapse justify-content-end navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link" aria-current="page" href="/">Home</a>
-              <li class="nav-item dropdown">
+              <a class="nav-link" aria-current="page" href="/">Beranda</a>
+              {{-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Feature
                 </a>
@@ -24,11 +24,11 @@
                   <li><a class="dropdown-item" href="#another">Another action</a></li>
                   <li><a class="dropdown-item" href="#else">Something else here</a></li>
                 </ul>
-              </li>
+              </li> --}}
               
-              <a class="nav-link me-3 active" href="/login">Login</a>
-            <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit">Search</button>
+              <a class="nav-link me-3 active" href="/login">Masuk</a>
+            {{-- <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Search</button> --}}
             </div>
           </div>
         </div>
