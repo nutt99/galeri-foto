@@ -55,4 +55,14 @@ class ProfilController extends Controller
             'data' => "sukses"
         ], 200);
     }
+
+    public function getDataFollower(Request $req){
+        $target = $req->input('targetId');
+        $follower = Follow::whereHas('pengguna', function($query){
+            $query->get();
+        });
+        return response()->json([
+            'data' => $follower
+        ], 200);
+    }
 }

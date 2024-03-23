@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}"/>
-    <title>Beranda</title>
+    <title>Dasbor</title>
     <style>
       .k :hover{
         background-color: rgb(156, 156, 156);
@@ -49,8 +49,10 @@
             </ul>
           </li> --}}
           
+          <a class="nav-link me-3 d-md-none" href="/dashboard">Album</a>
           <a class="nav-link me-3 d-md-none" href="/">Beranda</a>
-          <a class="nav-link me-3 d-md-none" href="/profil">Profile</a>
+          <a class="nav-link me-3 d-md-none" href="/profil/{{Session::get('uid')}}">Profile</a>
+          <a class="nav-link me-3 d-md-none" href="/logout">Keluar</a>
         {{-- <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">Search</button> --}}
         </div>

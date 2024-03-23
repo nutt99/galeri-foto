@@ -15,11 +15,14 @@ class AlbumController extends Controller
         $detailFoto = Foto::get()->where('albumId', $id_album);
         $album = Album::firstWhere('id', $id_album);
         $namaAlbum = explode("@", $album['nama_album'])[0];
+        $username = explode("@", $album['nama_album'])[1];
         return view('detailFotoView', [
+            'username' => $username,
             'namaAlbum' => $namaAlbum,
             'albumId' => $id_album,
             'visible' => $album->visibilitas,
-            'detailFoto' => $detailFoto
+            'detailFoto' => $detailFoto,
+            'user_album_id' => $album->userid
         ]);
     }
 

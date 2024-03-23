@@ -25,12 +25,7 @@ class HomeController extends Controller
         }   
     }
     public function berandaView(){
-        $rawFoto = Foto::with('albums')->whereHas('albums', function($query){
-            $query->where('visibilitas', '=', 'publik');
-        });
-        return view('beranda', [
-            'foto' => $rawFoto->orderBy(DB::raw('RAND()'))->take(10)->get()
-        ]);
+        return view('beranda');
     }
     public function berandaJSON(){
         $rawFoto = Foto::with('albums')->whereHas('albums', function($query){
@@ -46,7 +41,7 @@ class HomeController extends Controller
         $data = Pengguna::where('username', 'LIKE', '%'.$search.'%')->get();
 
         foreach ($data as $item) {
-            $output.='<a><p>'.$item['username'].'</p></a>';
+            $output.='<a class="text-decoration-none text-dark" href="/profil/'.$item['id'].'"><p>'.$item['username'].'</p></a>';
         }
 
         return response()->json([

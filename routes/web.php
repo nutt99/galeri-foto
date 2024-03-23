@@ -78,6 +78,7 @@ Route::get('/searchData', [HomeController::class, 'searchDataJSON']);
 
 Route::post('/addFollow', [ProfilController::class, 'addFollow'])->name('addFollow');
 Route::delete('/removeFollow', [ProfilController::class, 'removeFollow'])->name('removeFollow');
+Route::get('/getDataFollower', [ProfilController::class, 'getDataFollower'])->name('getDataFollower');
 
 
 

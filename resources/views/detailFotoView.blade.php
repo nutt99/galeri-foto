@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}"/>
-    <title>Beranda</title>
+    <title>Detail Album</title>
     <style>
       .k :hover{
         background-color: rgb(156, 156, 156);
@@ -31,6 +31,7 @@
     </style>
 </head>
 <body>
+  @if (Session::get('username') == $username)
   <div class="container">
     <div class="fixed-bottom mb-4 me-5 text-end">
       <button class="rounded-pill text-light border-0 text-center p-2 pe-1 fs-5" data-bs-toggle="modal" data-bs-target="#addPhotoDetail" style="background-color: black;">
@@ -38,6 +39,7 @@
       </button>
     </div>
   </div>
+  @endif
   {{-- navbar --}}
   <div class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: black">
     <div class="container-fluid">
@@ -58,7 +60,7 @@
           </li> --}}
           <a class="nav-link me-3 d-md-none" href="/dashboard">Album</a>
           <a class="nav-link me-3 d-md-none" href="/">Beranda</a>
-          <a class="nav-link me-3 d-md-none" href="/profil">Profile</a>
+          <a class="nav-link me-3 d-md-none" href="/profil/{{Session::get('uid')}}">Profile</a>
           <a class="nav-link me-3 d-md-none" href="/logout">Keluar</a>
         {{-- <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit">Search</button> --}}
@@ -79,7 +81,7 @@
             Album
           </div>
         </a>
-        <a href="/profil" class="text-decoration-none k">
+        <a href="/profil/{{Session::get('uid')}}" class="text-decoration-none k">
           <div class="d-flex justify-content-between align-items-center text-light mb-3" style="font-size: 19px">
             Profil
           </div>
@@ -181,6 +183,7 @@
             <div class="border-bottom border-3 border-dark mb-3 pb-2 pt-2 sticky-top bg-body">
               <div class="d-flex justify-content-around justify-content-md-between align-items-center">
                 <h2>{{ $namaAlbum }}</h2>
+                @if (Session::get('username') == $username)
                 <div class="row">
                   <i class="fas fa-times close-icon col d-none" id="closeHapus" onclick="backTrash()" style="cursor: pointer"></i>
                 <label for="hapusFoto" class="col" id="lblHapusFoto">
@@ -189,6 +192,7 @@
                 </label>
                 <i class="fas fa-solid fa-check col d-none" id="okeHapus" style="cursor: pointer" onclick="modalDelete()"></i>
                 </div>
+                @endif
               </div>
             </div>
             <div class="row column-gap-3">
@@ -213,9 +217,11 @@
                   @endphp" class="card-img-top" alt="...">
                     <div class="card-body" id="photoSet{{$a['id']}}">
                       <input class="ckfoto d-none" value="{{$a['id']}}" type="checkbox" name="foto[]" id="ckfoto" disabled>
+                       @if (Session::get('uid') == $user_album_id)
                        <i class="fas fa-solid fa-edit editId" style="cursor: pointer" id="editId{{$a['id']}}" onclick="setEditField('{{$a['id']}}')"></i>
                        <i class="fas fa-times close-icon d-none" style="cursor: pointer" id="cancelEdit{{$a['id']}}" onclick="cancelEdit('{{$a['id']}}')"></i>
                        <i class="fas fa-solid fa-check d-none" style="cursor: pointer" id="okEdit{{$a['id']}}" onclick="okEdit('{{$a['id']}}')"></i>
+                       @endif
                        <a class="text-decoration-none text-primary ms-1" href="/detail/{{$a['id']}}"><i class="fas fa-solid fa-eye"></i></a>
                        <h5 class="card-text text-truncate" id="desk{{$a['id']}}" ondblclick="setEditField('{{$a['id']}}')">{{$a['deskripsi']}}</h5>
                        <!-- Tombol, Tautan, atau elemen lainnya -->
