@@ -13,14 +13,7 @@
         .image-container{
             height: 250px;
         }
-        .material-symbols-outlined {
-          font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 24
-        }
-
+        
         .pointer-set:hover{
             cursor: pointer
         }
@@ -84,11 +77,11 @@
                                     <div class="row g-1">
                                         @if ($ceklike == false)
                                         <div class="col pointer-set" onclick="changeIcon()">
-                                            <i class="material-icons material-symbols-outlined" id="likE">favorite</i>
+                                            <i class="far fa-sharp fa-regular fa-heart" id="likE" style="font-size: 24px"></i>
                                         </div>
                                         @elseif ($ceklike == true)
                                         <div class="col pointer-set" onclick="changeIcon()">
-                                            <i class="material-icons" id="likE">favorite</i>
+                                            <i class="fas fa-sharp fa-solid fa-heart" id="likE" style="font-size: 24px"></i>
                                         </div>
                                         @endif
                                         <div class="col">
@@ -158,11 +151,13 @@
     <script>
         function changeIcon(){
             var element = document.getElementById("likE");
-        if(element.classList.contains("material-symbols-outlined")){
-            element.classList.remove("material-symbols-outlined");
+        if(element.classList.contains("far")){
+            element.classList.remove("far");
+            element.classList.add("fas")
         }
         else{
-            element.classList.add("material-symbols-outlined");
+            element.classList.add("far");
+            element.classList.remove("fas");
         }
         }
         function sendKomentar(){
